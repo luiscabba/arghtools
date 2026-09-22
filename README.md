@@ -110,3 +110,42 @@ running.
   and every link here that points at `/mappr/` waits on it.
 - Discord and Buy me a coffee are `#` placeholders until those exist.
 - The newsletter form posts nowhere yet.
+
+## Routes
+
+Settled 22 September 2026, on board 12 of the brand book.
+
+| Route | Owner | What sits there |
+|---|---|---|
+| `/` | ARGH! | The house page: the line, the shelf, the three rules, the community |
+| `/mappr/` | Mappr | The tool page |
+| `/mappr/app` | Mappr | The app, rewritten in from its own deployment |
+
+The root is the house and never a tool. A tool owns everything under its own
+folder, and the parent appears there exactly twice: the bar and the footer
+endorsement block. Community lives at the root only, which is why the
+`Join ARGH!` section left the Mappr page. A tool that is not built has no
+route, so Flowr and Docr are names in the index, not links.
+
+`/mappr/app` rewrites to `mappr-9v19.vercel.app`, the Mappr project's own
+deployment. The rewrite means the app is served from arghtools.com rather than
+redirected to, so the tool page and the app share one origin.
+
+**Browser storage is per origin.** Maps made on the app's current address do
+not follow it to `/mappr/app`. That migration is unsolved and it decides
+whether this move can be made quietly.
+
+## The ceramic field
+
+The house page hero wears a quiet ceramic field: keycaps drawn at 7 percent,
+a motif inside at most a fifth of them at 26, module 68. It is generated, not
+hand-written. To change it:
+
+    python3 tools/build-hero.py
+
+That rewrites the block between `<!--glaze:start-->` and `<!--glaze:end-->` in
+`index.html`. Do not hand-edit those paths. `tools/glaze.py` holds the hand's
+settings from board 05 (amplitude 1.2, sampled every 10 to 13px, round caps and
+joins, one overshoot at the closing corner) and `tools/motif-lib.json` holds
+the six motifs lifted from board 07. The motifs are placed and scaled only,
+never redrawn: re-sampling them at keycap size destroys the form.

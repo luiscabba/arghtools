@@ -1,0 +1,18 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "rewrites": [
+    {
+      "source": "/mappr/app",
+      "destination": "https://mappr-9v19.vercel.app/"
+    },
+    {
+      "source": "/mappr/app/",
+      "destination": "https://mappr-9v19.vercel.app/"
+    },
+    {
+      "source": "/mappr/app/:path*",
+      "destination": "https://mappr-9v19.vercel.app/:path*"
+    }
+  ]
+}

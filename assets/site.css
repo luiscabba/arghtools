@@ -489,3 +489,72 @@ footer .toolrow .s{font-family:var(--mono);font-size:9.5px;letter-spacing:1.1px;
   .news .field .dfield:focus-within .f1,.news .field .dfield:focus-within .f2,.news .field .dfield:focus-within .f3{animation:none}
   .drawn:hover .f1,.news .field .dfield:focus-within .f1{opacity:1}
 }
+
+/* ---------- the house page (arghtools.com/). The parent's own surface, so the
+   removal test runs the other way: the house is the subject and no single tool
+   may dominate. Runs quiet, per the ladder — glazed keys at 7 percent, a motif
+   on a few of them at 26. Focused is available in the hero in the week a tool
+   ships. It never goes loud: the plate is for print. ---------- */
+
+/* the page grid is Mappr's map paper further out, so the house drops it and
+   wears the keycap field instead */
+body.house{background-image:none}
+
+.house .topbar .name{font-size:22px}
+.house .topbar nav a{font-size:12.5px}
+
+.hhero{position:relative;padding:104px 0 96px;overflow:hidden}
+.hhero .glaze{position:absolute;inset:0;pointer-events:none}
+.hhero .glaze svg{width:100%;height:100%;display:block}
+.hhero .wrap{position:relative}
+.hhero .label{letter-spacing:2.4px}
+.hhero h1{
+  font-family:var(--display);font-weight:800;
+  font-size:104px;line-height:.94;letter-spacing:-4px;
+  margin:22px 0 0;
+}
+.hhero .lead{margin:22px 0 0;max-width:660px;font-size:19px;line-height:1.55;color:var(--ash)}
+.hhero .actions{margin-top:34px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.hhero .reassure{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;color:var(--muted)}
+
+.section.band{background:rgba(20,20,20,.72);border-top:1px solid #232323;border-bottom:1px solid #232323}
+
+/* the index: every tool, equally. Same box, same weight; only the state and
+   the link differ, because only one of them exists yet. */
+.shelf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.toolcard{
+  background:var(--panel);border:1px solid var(--line);
+  border-bottom-width:3px;border-radius:4px;
+  padding:26px 28px 24px;display:flex;flex-direction:column;gap:14px;min-height:268px;
+}
+.toolcard .head{display:flex;align-items:center;gap:12px}
+.toolcard h3{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-1px;margin:0}
+.toolcard .state{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:1.3px;color:var(--muted)}
+.toolcard .state.on{color:var(--green)}
+.toolcard .tline{font-family:var(--mono);font-size:11px;letter-spacing:1.4px;margin:0}
+.toolcard p{margin:0;font-size:14px;line-height:1.6;color:var(--ash);flex-grow:1}
+.toolcard .go{font-size:14px;font-weight:600}
+.toolcard.live{border-bottom-color:var(--yellow)}
+.toolcard.live .tline,.toolcard.live .go{color:var(--yellow)}
+.toolcard.soon{background:#1a1a1a;border-color:#2b2b2b;border-bottom-color:#2b2b2b}
+.toolcard.soon h3{color:var(--muted)}
+.toolcard.soon p{color:var(--muted)}
+.toolcard.soon svg{opacity:.55}
+
+.houserules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.houserules .head{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+.houserules .n{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.houserules h3{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.6px;margin:0}
+.houserules p{margin:0;font-size:14px;line-height:1.6;color:var(--ash)}
+
+@media (max-width:1000px){
+  .hhero{padding:72px 0 64px}
+  .hhero h1{font-size:64px;letter-spacing:-2.2px}
+  .hhero .lead{font-size:17px}
+  .shelf,.houserules{grid-template-columns:minmax(0,1fr)}
+  .toolcard{min-height:0}
+}
+@media (max-width:640px){
+  .hhero h1{font-size:46px;letter-spacing:-1.6px}
+  .house .topbar nav a{font-size:11.5px}
+}
