@@ -20,6 +20,11 @@
  *
  * Progressive enhancement: with no JS, or with reduced motion asked for, the
  * link is an ordinary link and nothing here runs.
+ *
+ * The plate is torn down on the way out and again on the way back. Without
+ * that, the back button restores the page from the browser's back/forward
+ * cache exactly as it left it, plate included, and you land on a screen of
+ * solid yellow with no way to clear it.
  */
 (function () {
   'use strict';
@@ -32,6 +37,18 @@
   var STEP = 70;          // ms between waves, stepped
   var HOLD = 300;         // ms the full plate holds before the hand-over
   var NS = 'http://www.w3.org/2000/svg';
+  var plate = null, timer = null;
+
+  function clear() {
+    if (timer) { clearTimeout(timer); timer = null; }
+    if (plate) { plate.remove(); plate = null; }
+    var stray = document.querySelector('.glaze-over');
+    if (stray) stray.remove();
+  }
+
+  // leaving, and coming back from the back/forward cache
+  window.addEventListener('pagehide', clear);
+  window.addEventListener('pageshow', clear);
 
   function svgTile(shape, motif, accent) {
     var s = document.createElementNS(NS, 'svg');
@@ -102,6 +119,7 @@
       }
     }
     document.body.appendChild(el);
+    plate = el;
     return Math.round((rows + cols) / 2) * STEP + HOLD;
   }
 
@@ -111,7 +129,8 @@
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     e.preventDefault();
+    clear();
     var wait = lay(accentOf(a));
-    setTimeout(function () { window.location.href = a.href; }, wait);
+    timer = setTimeout(function () { timer = null; window.location.href = a.href; }, wait);
   });
 })();
