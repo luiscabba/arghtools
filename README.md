@@ -149,3 +149,24 @@ settings from board 05 (amplitude 1.2, sampled every 10 to 13px, round caps and
 joins, one overshoot at the closing corner) and `tools/motif-lib.json` holds
 the six motifs lifted from board 07. The motifs are placed and scaled only,
 never redrawn: re-sampling them at keycap size destroys the form.
+
+## The Open Mappr transition
+
+Pressing Open Mappr glazes the screen with solid ceramic tiles, then hands
+over to the app. `assets/mappr-open.js` plus `assets/tile-data.js`, which
+`tools/build-tiles.py` writes.
+
+The plate takes its colour from the button it fired from, so it is Mappr's
+yellow today and Flowr's blue when Flowr ships, with nothing to change. That
+also keeps a tool page to one accent, which the seam rule asks for.
+
+Settled by eye against `tools/preview-transition.html`, which is a tuning
+harness and not part of the site: full plate, 70ms between waves, 300ms hold,
+80px module. The harness also holds two variations that were not taken, a
+gap-toothed one and one where the unfired tiles are drawn as outlines.
+
+Board 06 allows this because a transition is not rest. It is not a loading
+screen, and nothing on the site should become one.
+
+With JS off the link is an ordinary link, and reduced motion goes straight
+through.

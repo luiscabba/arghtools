@@ -27,9 +27,10 @@
   var D = window.ARGH_TILES;
   if (!D) return;
 
-  var MODULE = 68;        // board 07's own pitch
-  var STEP = 40;          // ms between waves, stepped
-  var HOLD = 90;          // ms the full plate holds before the hand-over
+  // Set by eye against tools/preview-transition.html, not derived.
+  var MODULE = 80;        // tile pitch
+  var STEP = 70;          // ms between waves, stepped
+  var HOLD = 300;         // ms the full plate holds before the hand-over
   var NS = 'http://www.w3.org/2000/svg';
 
   function svgTile(shape, motif, accent) {
