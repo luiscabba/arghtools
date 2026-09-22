@@ -204,7 +204,7 @@ p{margin:0}
 }
 .hero-panel{
   margin-top:38px;
-  border-radius:6px 6px 0 0;border-bottom:none;
+  /* the panel closes: it is a window onto the map, not a cut-off one */
 }
 .hero-panel .stage{
   height:300px;display:flex;align-items:center;justify-content:center;padding:10px;
