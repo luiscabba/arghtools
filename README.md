@@ -10,6 +10,7 @@ that opens and works.
 index.html                       the Mappr page
 assets/site.css                  tokens, layout, the whole system
 assets/mappr-demo.js             the looping map panel in section 02
+assets/fonts/                    Bricolage Grotesque 800, IBM Plex Sans and Mono
 assets/Excalifont-Regular.woff2  the map's hand-drawn face (SIL OFL 1.1)
 assets/icon.svg                  the brace mark, favicon
 FONT-LICENSE.md                  travels with the font
@@ -20,30 +21,62 @@ nothing to run.
 
 ## The design system
 
-Everything comes from the Mappr Identity Canvas, Direction D, settled 21 Sept
-2026: the brace mark, Mappr's own dark field with the graph grid, Chakra Petch
-over IBM Plex Sans and Mono, and the layout from HomeConsole-Signal2 with the
-GridScale page treatment.
+Settled on the ARGH! Identity Canvas, 22 September 2026. The site is a tool
+page, so the rule that governs it is: **the tool owns the page, the parent
+signs it.** The test is removal. Take away the index band and the footer block
+and this should still be unmistakably Mappr.
 
-Colour is the important rule. Field, panel, line, ink, muted and all six branch
-accents are read out of the app's `src/app.html` at 1.10.1, so the site and the
-app cannot drift apart. Ash `#b9bcc0` is the one value added here, for body copy,
-where Ink is too bright at length and Muted too dim.
+- The parent appears twice. The `ARGH!` link in the bar and the footer
+  endorsement block. Nothing between them belongs to the parent.
+- `Less dragging.` is Mappr's line and it replaces `Less argh.` everywhere on
+  this page. The house line appears once, in the footer, where the parent is
+  speaking as itself.
+- Yellow is Mappr's. The other five accents only appear in the index.
+- Each tool owns one ceramic motif as well as one accent: Mappr the quarter
+  arc, Flowr the pinwheel, Docr the half disc. Type no longer tells them apart,
+  so the motif and the accent have to.
 
-- Text on any accent is Field `#121212`, never Ink. Ink on an accent measures
-  between 1.1 and 1.9 to 1, so it disappears.
+Type: **one display face across ARGH! and every tool.** Bricolage Grotesque 800
+for display, IBM Plex Sans for reading, IBM Plex Mono for keys, labels, counts
+and versions. Chakra Petch left the system on 22 Sept; the brace mark stays,
+because the mark is where Mappr keeps its own identity now.
+
+Colour is unchanged and still the important rule. Field, panel, line, ink,
+muted and all six branch accents are read out of the app's `src/app.html` at
+1.10.1, so the site and the app cannot drift apart. Ash `#b9bcc0` is the one
+value added here.
+
+- Text on any accent is Field `#121212`, never Ink.
 - An accent as text sits only on Field or Panel, where all six clear 7.7 to 1.
 - Yellow is the single call to action colour.
 - Line `#343434` is for borders only. Never text, never an icon.
 - If the app's dark palette changes, these change with it. The app is the source.
 
-Type: Chakra Petch never sets a paragraph, Plex Mono is only for keys, labels,
-counts and versions, one Display per page, body copy runs to 620px, and
-Excalifont stays inside the map.
+## The hand
 
-The page grid is 60px at .07. The map paper is 20px at .10 with a 100px line at
-.19, so the map reads as the working zoom and the page as the same paper further
-out.
+Anything a person touches is drawn rather than ruled: buttons, the newsletter
+field, and anything interactive added later. Structure stays straight: section
+rules, dividers, the index band, the map grid, anything wider than about 480px
+and anything under 20px.
+
+The test for anything new is whether a person puts their cursor on it. If yes
+it is drawn, if no it is straight.
+
+- One amplitude everywhere, 1.2, sampled every 10 to 13px.
+- A second pass at 62 percent of the main stroke and half opacity. This is not
+  invented for the site: every node on the Mappr map is already drawn twice,
+  which is what gives the app its hand.
+- Three frames, cycled on hover with `steps`, 360ms. Never eased, because
+  sliding between drawings is what makes a wobble look like a bug.
+- Nothing moves at rest. Press drops a control 2px, the way a key does.
+- `prefers-reduced-motion: reduce` gets frame one and no timer.
+
+The edges are inline SVG with `preserveAspectRatio="none"`, drawn at close to
+the real control size so the stretch stays invisible. A control that ends up
+far from its drawn size needs its own frame rather than a harder stretch.
+
+Grain is an SVG `feTurbulence` filter over the page at 5 percent. There is no
+image file anywhere in it, so there is nothing to download or version.
 
 ## The map panel in the hero
 
