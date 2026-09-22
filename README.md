@@ -150,6 +150,22 @@ joins, one overshoot at the closing corner) and `tools/motif-lib.json` holds
 the six motifs lifted from board 07. The motifs are placed and scaled only,
 never redrawn: re-sampling them at keycap size destroys the form.
 
+## Critical CSS
+
+Both pages carry an inlined block of critical CSS so a late stylesheet costs
+polish rather than the whole design. It is generated, not hand-written:
+
+    python3 tools/build-critical.py
+
+That pulls real rules out of `assets/site.css` in source order, so the cascade
+still applies and the two copies cannot drift from the sheet. It writes between
+the `<!--critical:start-->` and `<!--critical:end-->` markers in `index.html`
+and `mappr/index.html`. Change what counts as critical by editing the selector
+lists at the top of the script, then re-run it.
+
+Re-run it after any change to the rules it covers, or the pages will paint
+with stale values above the fold.
+
 ## The Open Mappr transition
 
 Pressing Open Mappr glazes the screen with solid ceramic tiles, then hands
