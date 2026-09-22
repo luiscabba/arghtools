@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mappr by ARGH! — think at typing speed</title>
+<meta name="description" content="A keyboard-first mind map. Press an arrow, get a branch, keep typing. Mappr tidies itself, runs in your browser and uploads nothing.">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+
+<meta property="og:title" content="Mappr by ARGH! — think at typing speed">
+<meta property="og:description" content="A keyboard-first mind map. Press an arrow, get a branch, keep typing. Free forever, open source, nothing leaves your device.">
+<meta property="og:type" content="website">
+
+<link rel="stylesheet" href="assets/site.css">
+<link rel="preload" href="assets/fonts/chakra-petch-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body>
+
+<div class="spectrum" aria-hidden="true">
+  <span class="s1"></span><span class="s2"></span><span class="s3"></span>
+  <span class="s4"></span><span class="s5"></span><span class="s6"></span>
+</div>
+
+<header class="topbar">
+  <div class="inner">
+    <svg width="26" height="24" viewBox="0 0 124 112" fill="none" aria-hidden="true">
+      <path d="M30 14 C21 14.6 15.5 18 15.2 26 C14.8 36 15.4 44 15 52 C14.7 56.5 12 58 8 58.4 C12 58.8 14.8 60.4 15.1 65 C15.5 73 14.9 81 15.3 91 C15.6 99 21 102.4 30 103" stroke="#e3e3e3" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M44 27 C58 26.4 74 26.8 88 27.4" stroke="#ff8787" stroke-width="6" stroke-linecap="round"></path>
+      <path d="M44 58.5 C60 58 78 58.4 94 59" stroke="#ffd43b" stroke-width="6" stroke-linecap="round"></path>
+      <path d="M44 90 C56 89.4 70 89.8 82 90.4" stroke="#74c0fc" stroke-width="6" stroke-linecap="round"></path>
+    </svg>
+    <span class="name">Mappr</span>
+    <span class="ver">v1.10.1</span>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#keys">Keys</a>
+      <a href="#community" class="argh">ARGH!</a>
+      <a href="/mappr/" class="cta">Open Mappr</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="label">Mind maps, no toolbar</p>
+    <h1>Think at <span class="hl">typing</span> speed.</h1>
+    <p class="lead">Visualise an idea and present it the moment you have it. Press an arrow, get a branch, keep typing. Mappr tidies itself, so you never stop to arrange anything.</p>
+    <div class="actions">
+      <a href="/mappr/" class="btn btn-primary">Use Mappr, free</a>
+      <a href="#keys" class="btn btn-ghost">See the keys</a>
+    </div>
+    <span class="reassure">no sign up &nbsp;·&nbsp; opens instantly &nbsp;·&nbsp; nothing uploaded</span>
+  </div>
+
+  <div class="wrap">
+  <div class="panel hero-panel">
+    <div class="panel-bar">
+      <span class="tab on">map</span>
+      <span class="tab">networks</span>
+      <span class="tab">story</span>
+      <span class="spacer"></span>
+      <span class="chip" style="color:#ff8787">Cmd &#8594;</span>
+      <span class="chip" style="color:#ffd43b">Tab</span>
+      <span class="chip" style="color:#69db7c">Space</span>
+      <span class="count">7 nodes</span>
+    </div>
+    <div class="stage map-paper">
+      <svg viewBox="0 0 1000 248" fill="none" role="img" aria-label="A Mappr map: one centre node branching into three coloured branches, each carrying its own children.">
+        <path d="M30 104 C29 95 34 90.4 42 90 C61 88.9 80 89.3 96 90.3 C105.4 90.9 109.4 95.6 109 104 C108.6 112.4 108.8 121 108.2 129 C107.5 136.2 101.2 139.4 92.2 139.8 C73.2 140.8 55 140.6 42 139.6 C34.2 139.1 31.6 134.1 31.8 126.6 C32.2 118.6 32.3 111.8 30 104 Z" fill="#232323" stroke="#e3e3e3" stroke-width="3" stroke-linejoin="round"></path>
+        <path d="M110 98 C180 86 226 54 302 46" stroke="#ff8787" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M110 116 C190 118 250 122 314 128" stroke="#ffd43b" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M110 134 C180 156 226 190 302 206" stroke="#74c0fc" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M310 27 C310 20.4 314.4 17.8 321 17.4 C356 16.5 397 16.9 428 17.9 C437 18.3 441 22.7 440.6 29.6 C440.2 37 440.4 45 439.7 51.6 C439.1 57.6 434.4 60 426.4 60.4 C391 61.3 352 61.1 321 60.1 C314.4 59.8 310.7 56 310.9 50 C311.1 43.8 310.3 33.6 310 27 Z" fill="#3a1d1d" stroke="#ff8787" stroke-width="3" stroke-linejoin="round"></path>
+        <path d="M322 108 C322 101.4 326.4 98.8 333 98.4 C370 97.5 413 97.9 446 98.9 C455 99.3 459 103.7 458.6 110.6 C458.2 118 458.4 126 457.7 132.6 C457.1 138.6 452.4 141 444.4 141.4 C407 142.3 366 142.1 333 141.1 C326.4 140.8 322.7 137 322.9 131 C323.1 124.8 322.3 114.6 322 108 Z" fill="#332c17" stroke="#ffd43b" stroke-width="3" stroke-linejoin="round"></path>
+        <path d="M310 190 C310 183.4 314.4 180.8 321 180.4 C352 179.5 389 179.9 418 180.9 C427 181.3 431 185.7 430.6 192.6 C430.2 200 430.4 208 429.7 214.6 C429.1 220.6 424.4 223 416.4 223.4 C383 224.3 348 224.1 321 223.1 C314.4 222.8 310.7 219 310.9 213 C311.1 206.8 310.3 196.6 310 190 Z" fill="#16293d" stroke="#74c0fc" stroke-width="3" stroke-linejoin="round"></path>
+        <path d="M459 116 C520 109 566 94 624 86" stroke="#ffd43b" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M459 126 C522 133 570 146 626 157" stroke="#ffd43b" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M632 66 C632 60 635.8 57.6 642 57.2 C676 56.4 716 56.8 748 57.7 C756 58 759.6 62 759.2 68.2 C758.8 74.8 759 82 758.4 88 C757.8 93.4 753.6 95.6 746.4 96 C712 96.8 676 96.6 642 95.7 C635.8 95.4 632.6 92 632.8 86.6 C633 81 632.3 72 632 66 Z" fill="#332c17" stroke="#ffd43b" stroke-width="3" stroke-linejoin="round"></path>
+        <path d="M634 146 C634 140 637.8 137.6 644 137.2 C678 136.4 718 136.8 750 137.7 C758 138 761.6 142 761.2 148.2 C760.8 154.8 761 162 760.4 168 C759.8 173.4 755.6 175.6 748.4 176 C714 176.8 678 176.6 644 175.7 C637.8 175.4 634.6 172 634.8 166.6 C635 161 634.3 152 634 146 Z" fill="#332c17" stroke="#ffd43b" stroke-width="3" stroke-linejoin="round"></path>
+        <path d="M762 76 C808 71 846 62 892 55" stroke="#b197fc" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M762 160 C808 165 846 174 892 183" stroke="#69db7c" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M898 38 C898 33 901.4 31 906.8 30.7 C929 30 954 30.4 975 31.1 C982 31.4 985 34.6 984.6 39.8 C984.2 45 984.4 51 983.8 56 C983.2 60.4 979.2 62.2 973 62.6 C950 63.3 926 63.1 906.8 62.3 C901.4 62 898.6 59.2 898.8 54.8 C899 50 898.3 43 898 38 Z" fill="#241f3d" stroke="#b197fc" stroke-width="3" stroke-linejoin="round"></path>
+        <path d="M898 172 C898 167 901.4 165 906.8 164.7 C929 164 954 164.4 975 165.1 C982 165.4 985 168.6 984.6 173.8 C984.2 179 984.4 185 983.8 190 C983.2 194.4 979.2 196.2 973 196.6 C950 197.3 926 197.1 906.8 196.3 C901.4 196 898.6 193.2 898.8 188.8 C899 184 898.3 177 898 172 Z" fill="#16301d" stroke="#69db7c" stroke-width="3" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="section" id="what">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="hgroup">
+        <p class="label">What Mappr is</p>
+        <h2>A map that keeps up with you.</h2>
+      </div>
+      <p class="side">You never place a box or drag a line. You press a key and one appears, already connected, already in the right place. The whole tree re-measures itself after every keystroke and the camera moves with you, so the thing you are typing is always the thing you are looking at.</p>
+    </div>
+
+    <div class="panel demo-panel" id="mapprDemo">
+      <div class="panel-bar">
+        <span class="tab on">map</span>
+        <span class="tab">networks</span>
+        <span class="tab">story</span>
+        <span class="spacer"></span>
+        <span class="chip" data-chip="fork" style="color:#74c0fc">Cmd &#8594;</span>
+        <span class="chip" data-chip="enter" style="color:#ffd43b">&#9166;</span>
+        <span class="chip" data-chip="sib" style="color:#69db7c">&#8679; &#9166;</span>
+        <span class="count" id="mdCount">0 nodes</span>
+      </div>
+      <div class="md-stage map-paper">
+        <svg id="mdSvg" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="A map being built, one keystroke at a time: Thesis at the centre, an Evidence branch and a Counter branch growing from it, the tree tidying itself as each node lands.">
+          <g id="mdCam">
+            <g id="mdEdges" fill="none" stroke-linecap="round"></g>
+            <g id="mdNodes"></g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <p class="demo-caption">
+      <span>Nothing here is a video. It is the same layout the app runs.</span>
+      <span>Keys shown: <span style="color:#74c0fc">Cmd &#8594;</span> forks, <span style="color:#ffd43b">&#9166;</span> adds beside, <span style="color:#69db7c">&#8679;&#9166;</span> jumps to the next branch.</span>
+    </p>
+  </div>
+</section>
+
+<section class="section" id="philosophy">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="hgroup">
+        <p class="label">What we will not do</p>
+        <h2>Fast, light, private.</h2>
+      </div>
+      <p class="side">Diagram tools grow by adding. Every release brings another panel, another menu, another thing to load before you can draw a box. Mappr is built the other way round, and these three lines are what we check a feature against before it ships.</p>
+    </div>
+
+    <div class="pillars">
+      <article class="card pillar p1">
+        <div class="head"><span class="n">01</span><h3>Fast</h3></div>
+        <p>The point of Mappr is how quickly a thought becomes a branch. Every control is a key, the layout tidies itself, and the camera follows. Nothing asks you to stop and arrange.</p>
+        <div class="rule">A feature that adds a step between thinking and typing does not ship.</div>
+      </article>
+      <article class="card pillar p2">
+        <div class="head"><span class="n">02</span><h3>Light</h3></div>
+        <p>The whole app is one file with nothing to install and nothing to load from anywhere else. Open it once and it works on a plane, in a classroom with bad wifi, or with the network off entirely.</p>
+        <div class="rule">No dependencies. No sign up. No loading screen.</div>
+      </article>
+      <article class="card pillar p3">
+        <div class="head"><span class="n">03</span><h3>Private</h3></div>
+        <p>Your maps are stored by your browser, on your machine. There is no account, no server and nothing to upload, so nobody can read your work, including us.</p>
+        <div class="rule">Local is not the same as backed up. Export anything you cannot lose.</div>
+      </article>
+    </div>
+
+    <div class="closing">
+      <a href="/mappr/" class="btn btn-primary">Use Mappr, free</a>
+      <span>Free forever, and open source. Nothing is held back for a paid tier, because there is not one.</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="hgroup">
+        <p class="label">How it works</p>
+        <h2>Four keys is most of it.</h2>
+      </div>
+      <p class="side">There are sixty-one keys in Mappr and you will never need most of them. These four build a map. Press <span style="font-family:var(--mono);font-size:13px;color:var(--ink)">?</span> inside the app for the rest.</p>
+    </div>
+
+    <div class="keys" id="keys">
+      <article class="card keycard">
+        <span class="key blue">Cmd &#8594;</span>
+        <div>
+          <h3>Make a branch</h3>
+          <p>Any arrow works. Press the same direction again from the new node to keep going that way.</p>
+        </div>
+      </article>
+      <article class="card keycard">
+        <span class="key yellow">Tab</span>
+        <div>
+          <h3>Move around</h3>
+          <p>Steps through the nodes on the level you are on. Arrows move between levels.</p>
+        </div>
+      </article>
+      <article class="card keycard">
+        <span class="key green">Space</span>
+        <div>
+          <h3>Rename</h3>
+          <p>Retypes whatever is selected. An arrow key leaves typing and starts moving again.</p>
+        </div>
+      </article>
+      <article class="card keycard">
+        <span class="key violet">Cmd 3</span>
+        <div>
+          <h3>Present it</h3>
+          <p>Walks the map branch by branch in front of a room. No deck, no export.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="how-lower">
+      <article class="card storage">
+        <p class="label">Where your maps live</p>
+        <div class="top">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true" style="flex-shrink:0">
+            <rect x="6" y="14" width="60" height="40" rx="4" fill="none" stroke="#e3e3e3" stroke-width="2.2"></rect>
+            <path d="M24 60 L48 60" stroke="#e3e3e3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M36 54 L36 60" stroke="#e3e3e3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M18 28 C17.6 25 19.6 23.6 22.4 23.4 C30 23 38 23.2 44 23.6 C48 23.9 49.4 25.8 49.2 28.6 C49 32.6 49.1 36.6 48.9 40 C48.7 42.6 46.2 43.6 42 43.8 C34 44.2 26 44.1 21.6 43.8 C18.8 43.6 17.8 41.6 17.9 39 C18.1 35.6 18.2 31.6 18 28 Z" fill="#232323" stroke="#69db7c" stroke-width="2"></path>
+            <path d="M60 22 L66 16 M66 22 L60 16" stroke="#8d949b" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+          <p>In your browser's own storage, on this device. No account, no server, nothing uploaded, nothing to delete later.</p>
+        </div>
+        <ul>
+          <li class="plus"><span class="m">+</span><span>Works with the network off</span></li>
+          <li class="plus"><span class="m">+</span><span>Survives closing the tab and restarting</span></li>
+          <li class="plus"><span class="m">+</span><span>Install it and it opens like an app</span></li>
+          <li class="warn"><span class="m">!</span><span>Deleting site data is what clears your maps</span></li>
+          <li class="warn"><span class="m">!</span><span>Export anything you cannot afford to lose</span></li>
+        </ul>
+      </article>
+
+      <div class="panel">
+        <div class="panel-bar">
+          <span class="tab">map</span>
+          <span class="tab on" style="border-bottom-color:#b197fc">story</span>
+          <span class="spacer"></span>
+          <span class="count">presenting &nbsp;&#183;&nbsp; step 2 of 6</span>
+        </div>
+        <div class="story-stage map-paper">
+          <svg viewBox="0 0 660 200" fill="none" role="img" aria-label="Mappr presenting a map: the branch reached so far is lit in violet and everything not yet reached is faint.">
+            <path d="M20 96 C19 88 23.6 84 31 83.6 C48 82.6 65 83 79 83.9 C87.4 84.4 91 88.6 90.6 96 C90.2 103.4 90.4 111 89.8 118 C89.2 124.4 83.6 127.2 75.6 127.6 C58.6 128.5 42 128.3 30 127.4 C23 127 20.6 122.6 20.8 116 C21.2 109 21.3 103 20 96 Z" fill="#232323" stroke="#e3e3e3" stroke-width="2.6" stroke-linejoin="round"></path>
+            <path d="M91 92 C136 82 170 56 216 48" stroke="#b197fc" stroke-width="2.8" stroke-linecap="round"></path>
+            <path d="M91 108 C140 112 178 118 222 126" stroke="rgba(227,227,227,.16)" stroke-width="2.4" stroke-linecap="round"></path>
+            <path d="M222 28 C222 22 226 19.6 232 19.2 C258 18.4 287 18.8 312 19.7 C320 20 323.6 24 323.2 30.2 C322.8 36.8 323 44 322.4 50 C321.8 55.4 317.6 57.6 310.4 58 C284 58.8 254 58.6 232 57.7 C226 57.4 222.6 54 222.8 48.6 C223 43 222.3 34 222 28 Z" fill="#241f3d" stroke="#b197fc" stroke-width="2.8" stroke-linejoin="round"></path>
+            <text x="272" y="44" text-anchor="middle" fill="#b197fc" font-family="IBM Plex Sans, sans-serif" font-size="14">Evidence</text>
+            <path d="M226 116 C226 110 230 107.6 236 107.2 C262 106.4 291 106.8 316 107.7 C324 108 327.6 112 327.2 118.2 C326.8 124.8 327 132 326.4 138 C325.8 143.4 321.6 145.6 314.4 146 C288 146.8 258 146.6 236 145.7 C230 145.4 226.6 142 226.8 136.6 C227 131 226.3 122 226 116 Z" fill="none" stroke="rgba(227,227,227,.14)" stroke-width="2.4" stroke-linejoin="round"></path>
+            <path d="M324 40 C366 34 396 24 440 18" stroke="#b197fc" stroke-width="2.8" stroke-linecap="round"></path>
+            <path d="M324 48 C368 54 400 64 442 74" stroke="rgba(177,151,252,.3)" stroke-width="2.4" stroke-linecap="round"></path>
+            <path d="M446 10 C446 5.4 449.6 3.4 455 3 C480 2.2 507 2.6 530 3.4 C537.6 3.7 541 7.2 540.6 13 C540.2 18.8 540.4 26 539.8 32 C539.2 37 534.8 39 527.6 39.4 C502 40.2 476 40 455 39.2 C449.6 38.9 446.6 35.8 446.8 31 C447 26 446.3 15.4 446 10 Z" fill="#241f3d" stroke="#b197fc" stroke-width="2.8" stroke-linejoin="round"></path>
+            <path d="M448 64 C448 59.4 451.6 57.4 457 57 C482 56.2 509 56.6 532 57.4 C539.6 57.7 543 61.2 542.6 67 C542.2 72.8 542.4 80 541.8 86 C541.2 91 536.8 93 529.6 93.4 C504 94.2 478 94 457 93.2 C451.6 92.9 448.6 89.8 448.8 85 C449 80 448.3 69.4 448 64 Z" fill="none" stroke="rgba(227,227,227,.14)" stroke-width="2.4" stroke-linejoin="round"></path>
+            <rect x="204" y="8" width="140" height="62" fill="none" stroke="#b197fc" stroke-width="1.4" stroke-dasharray="5 4" rx="3"></rect>
+            <text x="274" y="84" text-anchor="middle" fill="#b197fc" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">ON SCREEN NOW</text>
+            <text x="40" y="170" fill="#8d949b" font-family="IBM Plex Mono, monospace" font-size="11">&#8594;  next     &#8592;  back     O  see the whole thing</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="community">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="hgroup">
+        <p class="label">The collective behind it</p>
+        <h2>Join ARGH!</h2>
+      </div>
+      <p class="side">ARGH! makes small, fast, free tools for people who are tired of the heavy ones. Mappr is the first. What gets built next is decided by the people using them, which right now means you.</p>
+    </div>
+
+    <div class="community">
+      <article class="card news">
+        <div>
+          <h3>Get the newsletter</h3>
+          <p>One email when something ships, and nothing else. It is also how we ask what to build.</p>
+        </div>
+        <form action="#" method="post">
+          <div class="field">
+            <label for="news">Email</label>
+            <input id="news" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+          <button type="submit">Join</button>
+        </form>
+        <div class="foot">No tracking. Unsubscribe from any email.</div>
+      </article>
+
+      <div class="links">
+        <a href="#discord" class="linkcard violet">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true" style="flex-shrink:0">
+            <path d="M4 20 L4 8 C4 5.8 5.4 4.4 7.6 4.4 L18.4 4.4 C20.6 4.4 22 5.8 22 8 L22 14.4 C22 16.6 20.6 18 18.4 18 L9.4 18 L4 22 Z" stroke="#b197fc" stroke-width="2" stroke-linejoin="round"></path>
+          </svg>
+          <span class="grow">
+            <span class="t" style="display:block">Discord</span>
+            <span class="d">Ask for a feature, report a bug, argue about keybinds</span>
+          </span>
+          <span class="arrow">&#8594;</span>
+        </a>
+
+        <a href="https://github.com/luiscabba/mappr" class="linkcard blue">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true" style="flex-shrink:0">
+            <path d="M9 22 L9 18.5 M17 22 L17 18.5" stroke="#74c0fc" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M5 13 C5 8 8.6 4.5 13 4.5 C17.4 4.5 21 8 21 13 C21 17.4 18.6 19.6 13 19.6 C7.4 19.6 5 17.4 5 13 Z" stroke="#74c0fc" stroke-width="2" stroke-linejoin="round"></path>
+          </svg>
+          <span class="grow">
+            <span class="t" style="display:block">Read the source</span>
+            <span class="d">Open source, so the privacy claim is something you can check</span>
+          </span>
+          <span class="arrow">&#8594;</span>
+        </a>
+
+        <a href="#coffee" class="linkcard red">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true" style="flex-shrink:0">
+            <path d="M5 9 L18 9 L17 20 C16.8 21.4 16 22 14.6 22 L8.4 22 C7 22 6.2 21.4 6 20 Z" stroke="#ff8787" stroke-width="2" stroke-linejoin="round"></path>
+            <path d="M18 11.5 L20 11.5 C21.4 11.5 22 12.4 22 13.6 C22 15.2 21 16 19.4 16 L17.6 16" stroke="#ff8787" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M9 6 L9 3.5 M13 6 L13 3.5" stroke="#ff8787" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+          <span class="grow">
+            <span class="t" style="display:block">Buy me a coffee</span>
+            <span class="d">Entirely optional. Nothing is locked behind it, now or later</span>
+          </span>
+          <span class="arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="inner">
+    <div class="brand">
+      <div class="lockup">
+        <svg width="24" height="22" viewBox="0 0 124 112" fill="none" aria-hidden="true">
+          <path d="M30 14 C21 14.6 15.5 18 15.2 26 C14.8 36 15.4 44 15 52 C14.7 56.5 12 58 8 58.4 C12 58.8 14.8 60.4 15.1 65 C15.5 73 14.9 81 15.3 91 C15.6 99 21 102.4 30 103" stroke="#e3e3e3" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M44 27 C58 26.4 74 26.8 88 27.4" stroke="#74c0fc" stroke-width="6" stroke-linecap="round"></path>
+          <path d="M44 58.5 C60 58 78 58.4 94 59" stroke="#ffd43b" stroke-width="6" stroke-linecap="round"></path>
+          <path d="M44 90 C56 89.4 70 89.8 82 90.4" stroke="#69db7c" stroke-width="6" stroke-linecap="round"></path>
+        </svg>
+        <span class="name">Mappr</span>
+        <span class="by">by ARGH!</span>
+      </div>
+      <div class="t">Free forever. Open source. Runs on your device and nowhere else.</div>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <span class="h">Mappr</span>
+        <a href="/mappr/">Open the app</a>
+        <a href="#keys">All the keys</a>
+        <a href="https://github.com/luiscabba/mappr/blob/main/CHANGELOG.md">What's new</a>
+      </div>
+      <div class="col">
+        <span class="h">ARGH!</span>
+        <a href="#community">The collective</a>
+        <a href="#discord">Discord</a>
+        <a href="https://github.com/luiscabba/mappr">Source</a>
+      </div>
+      <div class="col">
+        <span class="h">Next</span>
+        <span>More tools are coming.</span>
+        <span>The newsletter says when.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/mappr-demo.js" defer></script>
+</body>
+</html>

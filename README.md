@@ -1,0 +1,75 @@
+# arghtools
+
+The site for **Mappr by ARGH!**, at arghtools.com.
+
+Plain HTML and CSS. No framework, no build step, no dependencies. Vercel serves
+the folder as it is, which is the same idea the app itself is built on: one file
+that opens and works.
+
+```
+index.html                       the Mappr page
+assets/site.css                  tokens, layout, the whole system
+assets/mappr-demo.js             the looping map panel in section 02
+assets/Excalifont-Regular.woff2  the map's hand-drawn face (SIL OFL 1.1)
+assets/icon.svg                  the brace mark, favicon
+FONT-LICENSE.md                  travels with the font
+```
+
+To work on it, open `index.html` in a browser. There is nothing to install and
+nothing to run.
+
+## The design system
+
+Everything comes from the Mappr Identity Canvas, Direction D, settled 21 Sept
+2026: the brace mark, Mappr's own dark field with the graph grid, Chakra Petch
+over IBM Plex Sans and Mono, and the layout from HomeConsole-Signal2 with the
+GridScale page treatment.
+
+Colour is the important rule. Field, panel, line, ink, muted and all six branch
+accents are read out of the app's `src/app.html` at 1.10.1, so the site and the
+app cannot drift apart. Ash `#b9bcc0` is the one value added here, for body copy,
+where Ink is too bright at length and Muted too dim.
+
+- Text on any accent is Field `#121212`, never Ink. Ink on an accent measures
+  between 1.1 and 1.9 to 1, so it disappears.
+- An accent as text sits only on Field or Panel, where all six clear 7.7 to 1.
+- Yellow is the single call to action colour.
+- Line `#343434` is for borders only. Never text, never an icon.
+- If the app's dark palette changes, these change with it. The app is the source.
+
+Type: Chakra Petch never sets a paragraph, Plex Mono is only for keys, labels,
+counts and versions, one Display per page, body copy runs to 620px, and
+Excalifont stays inside the map.
+
+The page grid is 60px at .07. The map paper is 20px at .10 with a 100px line at
+.19, so the map reads as the working zoom and the page as the same paper further
+out.
+
+## The map panel in section 02
+
+`assets/mappr-demo.js` draws a map being built, about twelve seconds, looping,
+no pause on hover. The keys it shows are the app's real ones, taken from the
+help table in `src/app.html`:
+
+| key | what it does |
+|-----|--------------|
+| `Cmd` + arrow | fork a branch that way; the same direction again goes deeper |
+| `Enter` | another node beside this one, same level, same branch |
+| `Shift` `Enter` | same level, in the next branch along |
+
+The chips in the panel bar light in step with the action, and the node count in
+the bar follows along, so the claim and the picture are the same thing.
+
+The layout is computed rather than hand-placed, so editing `SCRIPT` at the top
+of the file changes the words, keys or timing and the map re-tidies itself
+around whatever you put in.
+
+`prefers-reduced-motion: reduce` gets the finished map as a still, with no timer
+running.
+
+## Still to do
+
+- `/mappr` is not served yet. The app lives in its own repo, `luiscabba/mappr`,
+  and every link here that points at `/mappr/` waits on it.
+- Discord and Buy me a coffee are `#` placeholders until those exist.
+- The newsletter form posts nowhere yet.
