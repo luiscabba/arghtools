@@ -563,3 +563,23 @@ body.house{background-image:none}
   .hhero h1{font-size:46px;letter-spacing:-1.6px}
   .house .topbar nav a{font-size:11.5px}
 }
+
+/* ---------- the Open Mappr transition: the house glazing itself over before
+   it hands you to the tool. Solid tiles bleeding off every edge, stepped in
+   as a wave. Board 06 allows it because a transition is not rest. ---------- */
+
+.glaze-over{
+  position:fixed;inset:0;z-index:100;display:grid;
+  grid-auto-rows:var(--m);pointer-events:none;
+  justify-content:center;align-content:center;
+}
+.glaze-over .gt{
+  display:block;width:var(--m);height:var(--m);opacity:0;
+  animation:gtin .001s steps(1,end) forwards;
+}
+.glaze-over .gt svg{display:block;width:100%;height:100%}
+@keyframes gtin{to{opacity:1}}
+
+@media (prefers-reduced-motion: reduce){
+  .glaze-over{display:none}
+}
