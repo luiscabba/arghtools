@@ -504,8 +504,13 @@ body.house{background-image:none}
 .house .topbar nav a{font-size:12.5px}
 
 .hhero{position:relative;padding:104px 0 96px;overflow:hidden}
-.hhero .glaze{position:absolute;inset:0;pointer-events:none}
-.hhero .glaze svg{width:100%;height:100%;display:block}
+/* the field is an asset, not markup: it keeps index.html small, and it cannot
+   paint before the stylesheet that places it, so a slow stylesheet can never
+   leave a full-size keycap grid shoving the page around */
+.hhero .glaze{
+  position:absolute;inset:0;pointer-events:none;
+  background:url("hero-field.svg") center center / cover no-repeat;
+}
 .hhero .wrap{position:relative}
 .hhero .label{letter-spacing:2.4px}
 .hhero h1{

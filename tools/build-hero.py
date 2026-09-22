@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""Regenerate the house page's quiet ceramic field, in place.
+"""Regenerate the house page's quiet ceramic field.
 
     python3 tools/build-hero.py
 
-Writes between the <!--glaze:start--> / <!--glaze:end--> markers in index.html.
+Writes assets/hero-field.svg, which the CSS lays into the hero as a
+background. It lives outside index.html so the page stays small and so the
+field cannot paint before the stylesheet that positions it.
 The rules it follows are board 07 (Ceramic) and board 05 (The hand):
 keycaps drawn, 1.5 stroke at 7 percent; a motif inside at most a fifth of them,
 1.6 stroke, group at 26 percent; module 68; no motif orthogonally adjacent to
 another, and none inside a key that sits under the hero copy.
 """
-import os, random, re, sys
+import os, random, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 from glaze import field
@@ -36,12 +38,9 @@ for c, r in cands:
     plan.append((c, r, n, col))
 
 body, _, _ = field(W, H, module=MODULE, plan=plan)
-svg = (f'<svg viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid slice" '
+svg = (f'<svg viewBox="0 0 {W} {H}" width="{W}" height="{H}" '
        f'xmlns="http://www.w3.org/2000/svg" aria-hidden="true">\n{body}\n</svg>')
 
-p = os.path.join('..', 'index.html')
-s = open(p).read()
-s = re.sub(r'(<!--glaze:start-->).*?(<!--glaze:end-->)',
-           lambda m: m.group(1) + '\n' + svg + '\n' + m.group(2), s, flags=re.S)
-open(p, 'w').write(s)
+p = os.path.join('..', 'assets', 'hero-field.svg')
+open(p, 'w').write(svg)
 print(f'{cols}x{rows} keys, {len(plan)} motifs ({len(plan)/(cols*rows):.0%}), {len(svg)} bytes')
