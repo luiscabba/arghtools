@@ -718,3 +718,13 @@ footer .cols{justify-content:flex-end}
   .drawnlink:hover .ed .f1,.drawnlink:hover .ed .f2,.drawnlink:hover .ed .f3,.keycap:hover .spin > g{animation:none}
   .keycap:hover .ed .f1,.drawnlink:hover .ed .f1{opacity:1}
 }
+
+/* ---------- light the field (book board 17, settled 23 Sept 2026). The keys
+   round the cursor show their motif; hero-light.js places and lights them.
+   On at once, out after a short stepped linger, never eased. ---------- */
+.lightfield{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lightfield svg{position:absolute;display:block;overflow:visible;opacity:0;transition:opacity 1ms steps(1,end) .26s}
+.lightfield svg.l1{opacity:.85;transition-delay:0s}
+.lightfield svg.l2{opacity:.42;transition-delay:0s}
+.lightfield svg[data-t].l1{opacity:.34}
+.lightfield svg[data-t].l2{opacity:.2}

@@ -14,6 +14,7 @@ assets/tiles.svg                 the band, plate and drawn-card sprite (tools/bu
 assets/mappr-demo.js             the looping map panel in the Mappr hero
 assets/mappr-open.js             the Open Mappr plate
 assets/keys.js                   lets a phone show why an unbuilt tool will not open
+assets/hero-light.js             lights the hero's motifs round the cursor
 assets/hero-field.svg            the house hero's keycap field (tools/build-hero.py)
 assets/fonts/                    Bricolage Grotesque 800, IBM Plex Sans and Mono
 assets/Excalifont-Regular.woff2  the map's hand-drawn face (SIL OFL 1.1)
@@ -154,6 +155,17 @@ settings from board 05 (amplitude 1.2, sampled every 10 to 13px, round caps and
 joins, one overshoot at the closing corner) and `tools/motif-lib.json` holds
 the six motifs lifted from board 07. The motifs are placed and scaled only,
 never redrawn: re-sampling them at keycap size destroys the form.
+
+## Light the field
+
+Settled 23 September 2026, on board 17. Every key in the house hero holds a
+motif; the cursor lights the ones around it (85 percent, the ring beyond at
+42, a third of that behind the type) and they go out after a short stepped
+linger. Keys with a resting motif keep it. `tools/build-hero.py` deals the
+motifs with their own seed, so the resting field never changes, and writes
+them inline between `<!--light:start-->` and `<!--light:end-->`;
+`assets/hero-light.js` places and lights them. Mouse and trackpad only: touch
+and reduced motion get the resting field.
 
 ## Critical CSS
 
