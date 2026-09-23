@@ -186,3 +186,47 @@ screen, and nothing on the site should become one.
 
 With JS off the link is an ordinary link, and reduced motion goes straight
 through.
+
+## Open
+
+As of 23 September 2026. The brand book's own list is on its Next steps page;
+this is what is open about the site.
+
+**arghtools.com does not point here.** It serves a GoDaddy Website Builder
+holding page. The site is live at `arghtools.vercel.app`. To connect it:
+unpublish the GoDaddy site and clear any domain forwarding first, or its DNS
+keeps overriding; add `arghtools.com` and `www` in the Vercel project's
+Domains settings; put the A and CNAME records it gives you into GoDaddy's DNS.
+Do not move the nameservers if there is any mail on the domain, or the MX
+records go with them.
+
+**`/mappr/app` may be redirecting rather than proxying.** A fetch came back as
+a cross-host redirect to `mappr-9v19.vercel.app` instead of serving the app
+under this origin. Unconfirmed. Open it and watch whether the address bar
+changes. If it redirects, the shared origin the route was built for does not
+exist, and the storage note below stops mattering.
+
+**Browser storage is per origin.** Maps made on `mappr-9v19.vercel.app` do not
+follow the app to `/mappr/app`. Unsolved, and it decides whether the move can
+be made quietly.
+
+**The brand book canvas is behind the repo.** Board 13, the house page, still
+shows a version whose keycaps were machine rects and whose motifs were exact
+arcs. The repo has the corrected field. The board needs republishing.
+
+**The transition timings are by eye, not measured.** 70/300/80 comes to about
+1.4s on a desktop and 1.6s on a wide screen, added to every Open Mappr press,
+on a site whose second pillar is that there is no loading screen. Worth
+re-checking against the live app rather than the harness.
+
+**The pinwheel reads as a bow-tie at keycap size.** It is two opposite blades
+in board 07's own drawing. Flowr owns that motif, so it matters before Flowr
+ships.
+
+**The inversion has no second half.** The hero runs `Less argh.` plain rather
+than inventing a pairing. The house page is the surface that most deserves
+one.
+
+**The Mappr page is 58KB** and still carries large inline SVGs for the map
+demos, which is the weight problem the house page had before the ceramic field
+moved out to its own asset.
