@@ -36,7 +36,7 @@ SHARED = [
 ]
 HOUSE = ['body.house', '.house .topbar .name', '.house .topbar nav a',
          '.hhero', '.hhero .glaze', '.hhero .wrap', '.hhero .label',
-         '.hhero h1', '.hhero .lead', '.hhero .actions', '.hhero .reassure']
+         '.hhero h1', '.hhero .lead', '.hhero .actions', '.claims', '.claims li', '.claims svg']
 MAPPR = ['.hero', '.hero .label', '.hero h1', '.hero h1 .hl', '.hero .lead',
          '.hero .actions', '.hero .reassure', '.hero-note',
          '.panel', '.panel-bar', '.hero-panel', '.map-paper']

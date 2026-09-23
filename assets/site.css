@@ -503,7 +503,9 @@ body.house{background-image:none}
 .house .topbar .name{font-size:22px}
 .house .topbar nav a{font-size:12.5px}
 
-.hhero{position:relative;padding:104px 0 96px;overflow:hidden}
+/* the hero fills the screen under the band, so the shelf starts at the fold
+   instead of peeking into it (settled 23 Sept 2026) */
+.hhero{position:relative;padding:104px 0 96px;overflow:hidden;min-height:calc(100svh - var(--nb));display:flex;align-items:center}
 /* the field is an asset, not markup: it keeps index.html small, and it cannot
    paint before the stylesheet that places it, so a slow stylesheet can never
    leave a full-size keycap grid shoving the page around */
@@ -511,16 +513,21 @@ body.house{background-image:none}
   position:absolute;inset:0;pointer-events:none;
   background:url("hero-field.svg") center center / cover no-repeat;
 }
-.hhero .wrap{position:relative}
+.hhero .wrap{position:relative;width:100%}
 .hhero .label{letter-spacing:2.4px}
 .hhero h1{
   font-family:var(--display);font-weight:800;
   font-size:104px;line-height:.94;letter-spacing:-4px;
   margin:22px 0 0;
 }
-.hhero .lead{margin:22px 0 0;max-width:660px;font-size:19px;line-height:1.55;color:var(--ash)}
+.hhero .lead{margin:22px 0 0;max-width:600px;font-size:19px;line-height:1.55;color:var(--ash)}
 .hhero .actions{margin-top:34px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
-.hhero .reassure{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;color:var(--muted)}
+/* the three promises: straight edges, because they are not buttons, and each
+   leads with a motif no tool owns (the rule cards' stamps) */
+.claims{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.claims li{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px 0 9px;border:1px solid #2f2f2f;background:rgba(18,18,18,.85);
+  font-family:var(--mono);font-size:11px;letter-spacing:1.2px;color:var(--ash)}
+.claims svg{width:14px;height:14px;flex-shrink:0}
 
 .section.band{background:rgba(20,20,20,.72);border-top:1px solid #232323;border-bottom:1px solid #232323}
 

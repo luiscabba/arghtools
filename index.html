@@ -61,14 +61,16 @@ a:hover{color:var(--ink)}
 body.house{background-image:none}
 .house .topbar .name{font-size:22px}
 .house .topbar nav a{font-size:12.5px}
-.hhero{position:relative;padding:104px 0 96px;overflow:hidden}
+.hhero{position:relative;padding:104px 0 96px;overflow:hidden;min-height:calc(100svh - var(--nb));display:flex;align-items:center}
 .hhero .glaze{position:absolute;inset:0;pointer-events:none;background:url("hero-field.svg") center center / cover no-repeat;}
-.hhero .wrap{position:relative}
+.hhero .wrap{position:relative;width:100%}
 .hhero .label{letter-spacing:2.4px}
 .hhero h1{font-family:var(--display);font-weight:800;font-size:104px;line-height:.94;letter-spacing:-4px;margin:22px 0 0;}
-.hhero .lead{margin:22px 0 0;max-width:660px;font-size:19px;line-height:1.55;color:var(--ash)}
+.hhero .lead{margin:22px 0 0;max-width:600px;font-size:19px;line-height:1.55;color:var(--ash)}
 .hhero .actions{margin-top:34px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
-.hhero .reassure{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;color:var(--muted)}
+.claims{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.claims li{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px 0 9px;border:1px solid #2f2f2f;background:rgba(18,18,18,.85);font-family:var(--mono);font-size:11px;letter-spacing:1.2px;color:var(--ash)}
+.claims svg{width:14px;height:14px;flex-shrink:0}
 .tileband{height:68px;overflow:hidden;display:flex;justify-content:center;background:var(--field);position:relative;z-index:1}
 .tileband .row{display:flex;flex:0 0 auto}
 .tileband .bt{display:block;width:68px;height:68px;flex:0 0 68px;opacity:0;animation:bandfire 1ms steps(1,start) forwards;animation-delay:calc(var(--i) * 34ms)}
@@ -122,12 +124,12 @@ html{scroll-padding-top:var(--nb)}
 <!-- the field is assets/hero-field.svg, laid by CSS. tools/build-hero.py writes it. -->
   </div>
   <div class="wrap">
-    <p class="label">A collective, not a company</p>
+    <p class="label">A collective</p>
     <h1>Less argh.</h1>
-    <p class="lead">Small tools that each do one job and then get out of the way. They open in a tab, work with the network off, and have nowhere to send your work even if they wanted to.</p>
+    <p class="lead">Simple jobs shouldn&#8217;t need an account, a subscription and your files.</p>
     <div class="actions">
       <a href="#index" class="btn btn-primary drawn"><span class="ed" aria-hidden="true"><svg viewBox="0 0 200 48" preserveAspectRatio="none" fill="none"><g class="f1"><path d="M1.9 2.1l11.4-.2 9.4.3 9.5-.2 11.4.7 9-1.2 10.3 1.2 11.8-1.8 11 2.2 9.5-.8 9.1-1.5 11.2.1 9.5.5 10 .5 11.3.9 10.5-.5 10.3.1 10.2-.9 11.6 1.7 9.9-.7-1.2 9.9-.1 10.6 1.1 11.8.2 10.9-10 1.1-12.6-1.5-8.2.6-10.1-.1-12.5.5-8.6-.9-12 .2-8.2 1-12.4-1.2-10.3-.5-8.7.3-10.8.7-11.2.7-10.5-.3-10.4-.5-10-.4-8.5 1.3-12 .2-10.5-1.2 1.6-10.4-1.9-10.1.3-12.8 1.4-10.8z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M2.4 1.8l11.5 1 9.4.2 11.1-.1 8.6.8 10.3-2.1 10.4.7 11.5-.7 9.1.8 12-1 10.4.5 10.3-.1 10.4 1.9 10.4-.8 10.3.3 8.1-.7 11.2-.3 10.6.3 10-.9 10.4.4 1 10.3-1.7 12.3-.1 10.4 1.5 12.6-11.1-2.2-10.1.8-10.7.6-10.1-.7-9.6.4-10.6-.4-10.6.7-9.1.4-10.4.1-12.5-1.2-9.8.3-9 .6-12-1.6-9.8 0-9.7.4-9.3 1.1-10.9-.6-11-.7-10.5 2 1.4-11.5-.7-12.5.8-9.2-1.7-11.6z" fill="none" stroke="currentColor" stroke-width="1.24" stroke-linejoin="round" opacity=".5"/></g><g class="f2"><path d="M2.2 1.6l9.1.2 10.7.5 9.9-1 10.9 1.1 9.8-1.5 11.4 1 10.1-.9 11.4.1 9.7-.1 10.8 1 10.7-1 10.3 1.4 9.6.4 11 0 9.7-1.7 10 .9 9.9 1 10.5-.1 11.2-.9-1.6 11.1 1.8 11.6-2.2 9.7 1.6 12.5-11.9-.4-10.3-1.1-8.6.2-11.6-.2-9.4.1-11.8.2-9.8 1.1-10.3-1.6-9.7 1.4-9.6-1.6-12 1.6-9.9.1-9.1-.5-10.4-1.2-10.5 1-10.3.7-9.8.4-10.9-1.5-9.5-.7-1.9-9.8.6-10.1-.1-12.9 1.2-10.1z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.3 1.4l10.2 2 8.8.1 11.9-1.2 9.4.6 10.3-.2 10.9-1.3 10.6 1.6 10.7 0 9.7.1 9.2-.6 12 1 8.2-.1 11.8-1.1 9.1 1.1 10.6-.7 9.9-.1 11.1-.6 9.8-.6 12 1.4-2.1 10.9 1.8 10.1.4 12.5-.9 11.4-11.1-2.3-9.9.3-9-.1-11.7 1.8-11.1-1.9-9.1.7-11.6.7-8.3-1.5-12 .2-9.5 1.3-10.8.4-10.8.2-10-1.9-10.3 1-8.7-1-11 1-10.6.6-10.9.3-10.1-1.3.4-10.6.5-10.3.5-12.7-1.8-9.5z" fill="none" stroke="currentColor" stroke-width="1.24" stroke-linejoin="round" opacity=".5"/></g><g class="f3"><path d="M2 .8l9.3 1.9 10.8.4 10.2-.4 11.7-.5 10.6.4 9-.9 11.3-.6 9.1 1.1 10.6-1.1 11.5.1 8.5 1.6 10.3-.9 10.9 0 10.2.6 11.6-1.7 9.6.9 10.6-.2 11.1 1.4 9.1.3 0 9.9-1 10.8 1.2 12.2-1.4 8.7-10.2 2.4-8.1-2.2-10.9.9-10.6 1.2-10.7-2.2-9.9.1-11.8.7-8.8 0-10.4.9-11.4-1-8.5 1.3-10.8.2-9.9-.8-11 0-10.1.8-10-1.3-11.8-.3-10.7-.2-10.3 1.2 2.2-11.3 0-12.3-.2-9.6-.4-11z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M1.4 1.9l11.1 1.1 11-.5 10.4 1 8.8-1 10.9-.4 11.8-.4 8.6-.2 12.1 1.9 9-.2 11.2-1.3 10.6-.3 10.3.7 8.6-.9 11 .5 9.7-.6 10.5.6 11.9.3 10-.1 9.9 1.2.2 10.1.6 10-.2 13.1-.8 10.6-11-1.1-10.8-.3-8.8.6-10.5.2-10.9.3-8.7-1.4-11.5 1.4-10.1-1.3-11.4 1.8-9.5-1.9-9.5.7-10.6 1.4-10.5-1.5-11.6-.6-8.9 1.8-11.1.2-10.1-1.4-10.1 1.2-9.3-.5-1.4-11.6-.6-10.9.6-10.7 1.2-11.5z" fill="none" stroke="currentColor" stroke-width="1.24" stroke-linejoin="round" opacity=".5"/></g></svg></span><span class="t">See the tools</span></a>
-      <span class="reassure">free forever &nbsp;&#183;&nbsp; open source &nbsp;&#183;&nbsp; nothing uploaded</span>
+      <ul class="claims" aria-label="What every tool promises"><li><svg viewBox="0 0 120 120" aria-hidden="true"><use href="/assets/tiles.svg#g-cut-diamond"/></svg>free forever</li><li><svg viewBox="0 0 120 120" aria-hidden="true"><use href="/assets/tiles.svg#g-square-in-square"/></svg>open source</li><li><svg viewBox="0 0 120 120" aria-hidden="true"><use href="/assets/tiles.svg#g-four-petals"/></svg>nothing uploaded</li></ul>
     </div>
   </div>
 </section>
