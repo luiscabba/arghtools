@@ -7,9 +7,14 @@ the folder as it is, which is the same idea the app itself is built on: one file
 that opens and works.
 
 ```
-index.html                       the Mappr page
+index.html                       the house page, ARGH! at the root
+mappr/index.html                 the Mappr page
 assets/site.css                  tokens, layout, the whole system
-assets/mappr-demo.js             the looping map panel in section 02
+assets/tiles.svg                 the band, plate and drawn-card sprite (tools/build-band.py)
+assets/mappr-demo.js             the looping map panel in the Mappr hero
+assets/mappr-open.js             the Open Mappr plate
+assets/keys.js                   lets a phone show why an unbuilt tool will not open
+assets/hero-field.svg            the house hero's keycap field (tools/build-hero.py)
 assets/fonts/                    Bricolage Grotesque 800, IBM Plex Sans and Mono
 assets/Excalifont-Regular.woff2  the map's hand-drawn face (SIL OFL 1.1)
 assets/icon.svg                  the brace mark, favicon
@@ -166,23 +171,43 @@ lists at the top of the script, then re-run it.
 Re-run it after any change to the rules it covers, or the pages will paint
 with stale values above the fold.
 
+## The band
+
+Settled 23 September 2026, on board 14 of the brand book. One row of the field,
+fired, under the bar on every page, in the colours of whoever owns the page.
+The house band is all six glazes, each motif in its owner's colour (Mappr the
+quarter disc in yellow, Flowr the pinwheel in blue, Docr the half disc in
+green), so it is the index laid out as tiles. A tool's band is that tool's one
+glaze and one motif, solid and open alternating.
+
+    python3 tools/build-band.py
+
+writes the band between `<!--band:start-->` and `<!--band:end-->` in both pages,
+and `assets/tiles.svg`, the one sprite the band, the plate and the house page's
+drawn cards all use. `tools/glaze-lib.json` holds board 07's six glazes, lifted
+from the book. It fires once on load, left to right, and a tile lifts and turns
+under the cursor. Nothing moves at rest.
+
+## The cards are keys
+
+Settled 23 September 2026, on board 15. The tool cards on the house page sit on
+a skirt in the tool's accent: they rise under the cursor and go down when
+pressed. Mappr's grows a little branch out of Open Mappr; Flowr's pinwheel goes
+round; Docr's half disc comes up. A tool that is not built jams instead of going
+down and says so, with a link to ask for it (`assets/keys.js` is only there
+because a phone does not focus a button it taps). Rule cards are not
+clickable, so they stay straight and only stamp their number as a tile. The
+link cards are drawn in their own colour and each icon has one small trick.
+
 ## The Open Mappr transition
 
-Pressing Open Mappr glazes the screen with solid ceramic tiles, then hands
-over to the app. `assets/mappr-open.js` plus `assets/tile-data.js`, which
-`tools/build-tiles.py` writes.
-
-The plate takes its colour from the button it fired from, so it is Mappr's
-yellow today and Flowr's blue when Flowr ships, with nothing to change. That
-also keeps a tool page to one accent, which the seam rule asks for.
-
-Settled by eye against `tools/preview-transition.html`, which is a tuning
-harness and not part of the site: full plate, 70ms between waves, 300ms hold,
-80px module. The harness also holds two variations that were not taken, a
-gap-toothed one and one where the unfired tiles are drawn as outlines.
-
-Board 06 allows this because a transition is not rest. It is not a loading
-screen, and nothing on the site should become one.
+Settled 23 September 2026, on board 16. Pressing Open Mappr drops a plate of
+Mappr's glaze out of the band, 45ms a row away from it and 8ms a column away
+from the button, holds 300ms, and goes to `/mappr/app#glaze=<x>,<y>`, where
+`<x>,<y>` is the band's offset, so the app can lay the identical plate and roll
+it back up once the map has drawn. `assets/mappr-open.js`. The tiles are
+`p-<motif>` in `assets/tiles.svg`, taken from the button's `data-plate`, Mappr's
+quarter disc by default, so Flowr gets its own plate with nothing else to change.
 
 With JS off the link is an ordinary link, and reduced motion goes straight
 through.
@@ -210,14 +235,9 @@ exist, and the storage note below stops mattering.
 follow the app to `/mappr/app`. Unsolved, and it decides whether the move can
 be made quietly.
 
-**The brand book canvas is behind the repo.** Board 13, the house page, still
-shows a version whose keycaps were machine rects and whose motifs were exact
-arcs. The repo has the corrected field. The board needs republishing.
-
-**The transition timings are by eye, not measured.** 70/300/80 comes to about
-1.4s on a desktop and 1.6s on a wide screen, added to every Open Mappr press,
-on a site whose second pillar is that there is no loading screen. Worth
-re-checking against the live app rather than the harness.
+**The retract is only half built.** The site drops the plate and hands the app
+`#glaze=<x>,<y>`. Until the Mappr app paints the same plate on its first frame
+and rolls it up, the plate still disappears the moment the app loads.
 
 **The pinwheel reads as a bow-tie at keycap size.** It is two opposite blades
 in board 07's own drawing. Flowr owns that motif, so it matters before Flowr

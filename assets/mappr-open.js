@@ -1,41 +1,33 @@
-/* The Open Mappr transition.
+/* The Open Mappr transition (book board 16).
  *
- * Pressing Open Mappr glazes the screen with solid ceramic tiles, then hands
- * over to the app. It is the one moment on the site where there is a real
- * wait, so it is the one place the ceramic moves: board 06 says nothing moves
- * at rest, and a transition is not rest.
+ * Pressing Open Mappr drops a plate of glazed tiles out of the band: the row
+ * the band sits in fills first, then the rows above and below it, 45ms a row
+ * away from the band and 8ms a column away from the button you pressed, so it
+ * ripples out from where you are looking. The plate holds 300ms and then the
+ * page goes to /mappr/app#glaze=<x>,<y>, the band's offset on screen. The app paints the same plate on its first
+ * frame and rolls it back up once the map has drawn, so the plate never just
+ * vanishes; an app that does not know about #glaze simply ignores it.
  *
- * The plate takes its colour from the button it fired from, so pressing the
- * yellow Open Mappr button turns the screen Mappr's yellow. That is board
- * 10's settled line made literal: the hero button is the same yellow, shape
- * and ground as the app it opens, so pressing it changes the content and
- * nothing else. It also keeps a tool page to one accent, which the seam rule
- * requires and which a six-colour house plate would break.
+ * Every tile is the button's tool's glaze on an opaque ground (p-<motif> in
+ * assets/tiles.svg, which the band has already loaded), turned a quarter by
+ * (row * 3 + column), which is the pattern the app lays too. The plate lines
+ * up with the band's columns and rows, so it reads as the band carrying on.
  *
- * The other rules it keeps: solid tiles bleeding off every edge, so the field
- * never reads as a decorative box; no motif repeated beside or above itself;
- * the knockout inside a motif is the ground, never white; steps, never an
- * ease, because sliding between drawings is what makes a wobble look like a
- * bug.
+ * It is the one moment the ceramic moves on its own: board 06 says nothing
+ * moves at rest, and a transition is not rest. Steps, never an ease.
  *
- * Progressive enhancement: with no JS, or with reduced motion asked for, the
- * link is an ordinary link and nothing here runs.
- *
- * The plate is torn down on the way out and again on the way back. Without
- * that, the back button restores the page from the browser's back/forward
- * cache exactly as it left it, plate included, and you land on a screen of
- * solid yellow with no way to clear it.
+ * With no JS, with reduced motion asked for, or with a modifier held, the link
+ * is an ordinary link and nothing here runs. The plate is torn down on the way
+ * out and again on the way back, so the back/forward cache cannot restore a
+ * screen of solid yellow.
  */
 (function () {
   'use strict';
 
-  var D = window.ARGH_TILES;
-  if (!D) return;
-
-  // Set by eye against tools/preview-transition.html, not derived.
-  var MODULE = 80;        // tile pitch
-  var STEP = 70;          // ms between waves, stepped
-  var HOLD = 300;         // ms the full plate holds before the hand-over
+  var M = 68;             // the band's module
+  var ROW = 45, COL = 8;  // ms per row away from the band, per column away from the button
+  var HOLD = 300;         // ms the whole plate holds before the hand-over
+  var SPRITE = '/assets/tiles.svg';
   var NS = 'http://www.w3.org/2000/svg';
   var plate = null, timer = null;
 
@@ -45,92 +37,66 @@
     var stray = document.querySelector('.glaze-over');
     if (stray) stray.remove();
   }
-
-  // leaving, and coming back from the back/forward cache
   window.addEventListener('pagehide', clear);
   window.addEventListener('pageshow', clear);
 
-  function svgTile(shape, motif, accent) {
+  function tile(motif, rot) {
     var s = document.createElementNS(NS, 'svg');
-    s.setAttribute('viewBox', '-2 -2 104 104');
-    s.setAttribute('aria-hidden', 'true');
-    var fill = document.createElementNS(NS, 'path');
-    fill.setAttribute('d', shape);
-    fill.setAttribute('fill', accent);
-    fill.setAttribute('stroke', accent);
-    fill.setAttribute('stroke-width', '2');
-    fill.setAttribute('stroke-linejoin', 'round');
-    s.appendChild(fill);
-    // the motif, knocked out in the ground
-    motif.forEach(function (d) {
-      var p = document.createElementNS(NS, 'path');
-      // the motif is normalised to a 100 box; sit it at 55 percent, centred
-      p.setAttribute('transform', 'translate(22.5,22.5) scale(0.55)');
-      p.setAttribute('d', d);
-      p.setAttribute('fill', 'none');
-      p.setAttribute('stroke', D.ground);
-      p.setAttribute('stroke-width', '4');
-      p.setAttribute('stroke-linecap', 'round');
-      p.setAttribute('stroke-linejoin', 'round');
-      s.appendChild(p);
-    });
+    s.setAttribute('viewBox', '0 0 120 120');
+    var g = document.createElementNS(NS, 'g');
+    g.setAttribute('transform', 'rotate(' + rot + ' 60 60)');
+    var u = document.createElementNS(NS, 'use');
+    u.setAttribute('href', SPRITE + '#p-' + motif);
+    g.appendChild(u);
+    s.appendChild(g);
     return s;
   }
 
-  function accentOf(a) {
-    var c = window.getComputedStyle(a).color;
-    // a link with no accent of its own falls back to the house's yellow
-    return (c && c !== 'rgba(0, 0, 0, 0)') ? c : D.accents[2];
-  }
-
-  function lay(accent) {
-    var cols = Math.ceil(window.innerWidth / MODULE) + 1;
-    var rows = Math.ceil(window.innerHeight / MODULE) + 1;
-    var names = Object.keys(D.motifs);
-    var grid = [];
+  function lay(a, motif) {
+    var W = window.innerWidth, H = window.innerHeight;
+    // anchor the grid to the band, so the plate is the band carrying on
+    var row = document.querySelector('.tileband .row');
+    var ox = 0, oy = 0;
+    if (row) {
+      var b = row.getBoundingClientRect();
+      ox = b.left; oy = b.top;
+    }
+    var c0 = Math.floor((0 - ox) / M), c1 = Math.ceil((W - ox) / M);
+    var r0 = Math.floor((0 - oy) / M), r1 = Math.ceil((H - oy) / M);
+    var br = a.getBoundingClientRect();
+    var bc = Math.floor((br.left + br.width / 2 - ox) / M);
     var el = document.createElement('div');
     el.className = 'glaze-over';
     el.setAttribute('aria-hidden', 'true');
-    el.style.setProperty('--m', MODULE + 'px');
-    el.style.gridTemplateColumns = 'repeat(' + cols + ', var(--m))';
-
-    for (var r = 0; r < rows; r++) {
-      grid[r] = [];
-      for (var c = 0; c < cols; c++) {
-        // one accent across the plate, so never two of the same motif adjacent
-        var bad = {};
-        if (c > 0) bad[grid[r][c - 1].m] = 1;
-        if (r > 0) bad[grid[r - 1][c].m] = 1;
-        var m, guard = 0;
-        do { m = (Math.random() * names.length) | 0; guard++; }
-        while (bad[m] && guard < 30);
-        grid[r][c] = { m: m };
-
+    var last = 0;
+    for (var r = r0; r < r1; r++) {
+      for (var c = c0; c < c1; c++) {
+        var d = Math.abs(r) * ROW + Math.abs(c - bc) * COL;   // row 0 is the band's row
+        if (d > last) last = d;
         var cell = document.createElement('span');
         cell.className = 'gt';
-        // stepped in by distance, so the plate arrives as a wave not a fade
-        cell.style.animationDelay = (Math.round((r + c) / 2) * STEP) + 'ms';
-        cell.appendChild(svgTile(
-          D.tiles[(r * 3 + c * 5) % D.tiles.length],
-          D.motifs[names[m]],
-          accent
-        ));
+        cell.style.left = (ox + c * M) + 'px';
+        cell.style.top = (oy + r * M) + 'px';
+        cell.style.animationDelay = d + 'ms';
+        cell.appendChild(tile(motif, (((r * 3 + c) % 4) + 4) % 4 * 90));
         el.appendChild(cell);
       }
     }
     document.body.appendChild(el);
     plate = el;
-    return Math.round((rows + cols) / 2) * STEP + HOLD;
+    return { wait: last + HOLD, at: Math.round(ox) + ',' + Math.round(oy) };
   }
 
   document.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a[href="/mappr/app"]') : null;
     if (!a) return;
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     e.preventDefault();
     clear();
-    var wait = lay(accentOf(a));
-    timer = setTimeout(function () { timer = null; window.location.href = a.href; }, wait);
+    var p = lay(a, a.getAttribute('data-plate') || 'quarter-disc');
+    // the app lays the same plate at the same offset, so the hand-over has no seam
+    var to = a.href.split('#')[0] + '#glaze=' + p.at;
+    timer = setTimeout(function () { timer = null; window.location.href = to; }, p.wait);
   });
 })();

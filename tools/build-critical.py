@@ -28,6 +28,7 @@ SHARED = [
     '.btn.drawn.btn-primary', '.btn.drawn.btn-primary .t',
     '.btn.drawn.btn-ghost', '.btn.drawn.btn-ghost .t',
     '.grain', '.grain svg',
+    '.tileband', '.tileband .row', '.tileband .bt', '.tileband .bt svg',
 ]
 HOUSE = ['body.house', '.house .topbar .name', '.house .topbar nav a',
          '.hhero', '.hhero .glaze', '.hhero .wrap', '.hhero .label',
