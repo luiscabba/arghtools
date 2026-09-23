@@ -198,7 +198,9 @@ writes the band between `<!--band:start-->` and `<!--band:end-->` in both pages,
 and `assets/tiles.svg`, the one sprite the band, the plate and the house page's
 drawn cards all use. `tools/glaze-lib.json` holds board 07's six glazes, lifted
 from the book. It fires once on load, left to right, and a tile lifts and turns
-under the cursor. Nothing moves at rest.
+under the cursor. A beat after it has fired in, the wave (board 18) runs
+through it once: each motif turns a full circle in eight clicks, left to
+right, then the band settles for good. Nothing moves at rest.
 
 ## The cards are keys
 

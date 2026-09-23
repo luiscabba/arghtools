@@ -728,3 +728,14 @@ footer .cols{justify-content:flex-end}
 .lightfield svg.l2{opacity:.42;transition-delay:0s}
 .lightfield svg[data-t].l1{opacity:.34}
 .lightfield svg[data-t].l2{opacity:.2}
+
+/* ---------- the wave (book board 18, settled 23 Sept 2026). Once the band has
+   fired in and sat still for a beat, each motif turns a full circle in eight
+   45 degree clicks, left to right, 45ms a tile, then the band settles for
+   good. It runs once per load. No fill mode, so when it ends the hover turn
+   still works; it ends where it started anyway. Each tile is clipped to its
+   own square so a turning glaze never spills onto its neighbours. ---------- */
+.tileband .bt svg{clip-path:inset(0)}
+.tileband .bt use{animation:bandspin 400ms steps(8,end) calc(1050ms + var(--i) * 45ms)}
+@keyframes bandspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.tileband .bt use{animation:none}}
