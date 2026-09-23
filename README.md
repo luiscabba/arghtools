@@ -244,6 +244,13 @@ because a phone does not focus a button it taps). Rule cards are not
 clickable, so they stay straight and only stamp their number as a tile. The
 link cards are drawn in their own colour and each icon has one small trick.
 
+A phone cannot hover, so on a touch screen a card is selected instead: tapping
+one gives it everything the cursor would (the glazing edge, the icon's trick),
+one card at a time, until you tap somewhere else. A card that is a link goes on
+the second tap, so the trick is seen first; the unbuilt tools light up and jam
+on the same tap; a rule card toggles. Buttons and the nav keys are not cards and
+act on the first tap. `assets/keys.js`, `.is-sel` in `assets/site.css`.
+
 ## The Open Mappr transition
 
 Settled 23 September 2026, on board 16. Pressing Open Mappr drops a plate of

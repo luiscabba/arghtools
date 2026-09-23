@@ -712,11 +712,40 @@ footer .cols{justify-content:flex-end}
 .glaze-over{display:block}
 .glaze-over .gt{position:absolute;width:68px;height:68px;animation-timing-function:steps(1,start)}
 
+/* ---------- a phone cannot hover, so a card is selected instead (settled
+   23 Sept 2026). keys.js marks the card you tap .is-sel and it shows exactly
+   what the cursor would: the edge glazes, the icon does its one trick. A card
+   that is a link goes on the second tap, so the trick is seen before it goes.
+   Buttons and the nav keys are not cards and act on the first tap. ---------- */
+.keycap.is-sel .face{transform:translateY(0)}
+.keycap.is-sel:active .face{transform:translateY(5px)}
+.keycap.is-sel .ed{color:var(--acc)}
+.keycap.is-sel .ed .f1,.drawnlink.is-sel .ed .f1{animation:bf1 .36s steps(1,end) infinite}
+.keycap.is-sel .ed .f2,.drawnlink.is-sel .ed .f2{animation:bf2 .36s steps(1,end) infinite}
+.keycap.is-sel .ed .f3,.drawnlink.is-sel .ed .f3{animation:bf3 .36s steps(1,end) infinite}
+.keycap.is-sel .arrow,.linkcard.is-sel .arrow{transform:translateX(4px)}
+.keycap.is-sel .sprout{display:block}
+.keycap.is-sel .sprout .s1{animation:keyon 1ms steps(1,start) 0ms forwards}
+.keycap.is-sel .sprout .s2{animation:keyon 1ms steps(1,start) 150ms forwards}
+.keycap.is-sel .sprout .s3{animation:keyon 1ms steps(1,start) 300ms forwards}
+.keycap.is-sel .spin > g{animation:keyspin .36s steps(3,start) forwards}
+.keycap.is-sel .rise{transform:translateY(0)}
+.houserules .card.is-sel .num{visibility:hidden}
+.houserules .card.is-sel .stamp{visibility:visible;transform:scale(1)}
+.linkcard.is-sel .dots circle:nth-child(1),.linkcard.is-sel .steam path:nth-child(1){animation:keyon 1ms steps(1,start) 0ms forwards}
+.linkcard.is-sel .dots circle:nth-child(2),.linkcard.is-sel .steam path:nth-child(2),.linkcard.is-sel .slash{animation:keyon 1ms steps(1,start) 120ms forwards}
+.linkcard.is-sel .dots circle:nth-child(3),.linkcard.is-sel .steam path:nth-child(3){animation:keyon 1ms steps(1,start) 240ms forwards}
+.linkcard.is-sel .brl{transform:translateX(-2px)}
+.linkcard.is-sel .brr{transform:translateX(2px)}
+.houserules .card,.keycap,.linkcard{-webkit-tap-highlight-color:transparent}
+
 @media (prefers-reduced-motion: reduce){
   .tileband .bt{animation:none;opacity:1}
   .keycap:hover .ed .f1,.keycap:hover .ed .f2,.keycap:hover .ed .f3,
-  .drawnlink:hover .ed .f1,.drawnlink:hover .ed .f2,.drawnlink:hover .ed .f3,.keycap:hover .spin > g{animation:none}
-  .keycap:hover .ed .f1,.drawnlink:hover .ed .f1{opacity:1}
+  .drawnlink:hover .ed .f1,.drawnlink:hover .ed .f2,.drawnlink:hover .ed .f3,.keycap:hover .spin > g,
+  .keycap.is-sel .ed .f1,.keycap.is-sel .ed .f2,.keycap.is-sel .ed .f3,
+  .drawnlink.is-sel .ed .f1,.drawnlink.is-sel .ed .f2,.drawnlink.is-sel .ed .f3,.keycap.is-sel .spin > g{animation:none}
+  .keycap:hover .ed .f1,.drawnlink:hover .ed .f1,.keycap.is-sel .ed .f1,.drawnlink.is-sel .ed .f1{opacity:1}
 }
 
 /* ---------- light the field (book board 17, settled 23 Sept 2026). The keys
