@@ -15,7 +15,9 @@ Writes two things:
                                  plate, which has to cover what is under it
 
   the band markup    between <!--band:start--> and <!--band:end--> in
-                     index.html (the house) and mappr/index.html (Mappr).
+                     index.html (the house) and mappr/index.html (Mappr). Since
+                     board 19 the band is the page's bar too: the wordmark and
+                     the links as keys sit in the row.
 
 The band is one row of the field, fired (book board 14). Every motif wears its
 owner's colour: Mappr the quarter disc in yellow, Flowr the pinwheel in blue,
@@ -53,7 +55,7 @@ PAIR = {'quarter-disc': 'yellow', 'pinwheel': 'blue', 'half-disc': 'green',
         'cut-diamond': 'orange', 'square-in-square': 'red', 'four-petals': 'violet'}
 GROUND = '#121212'
 OWN = re.compile(r'#(?!121212)[0-9a-fA-F]{6}')
-N, SEEN_FROM = 40, 9          # tiles in a band; the first tile a 1440 screen shows
+N = 30                        # tiles in a band row, more than the widest screen shows
 SPRITE = '/assets/tiles.svg'
 
 
@@ -99,6 +101,11 @@ def sprite():
                f'<path d="{edge(360, 268, 990, 1.5, 1.0)}" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>')
     # the community link cards
     out += frames('e-link', 600, 76, 51, '#1e1e1e', 1.6)
+    # the nav keys in the band (board 19): an outline in three frames, and the
+    # glaze it fills with under the cursor
+    out += frames('e-nav', 150, 56, 71, 'none', 2)
+    out.append(f'<symbol id="e-navfill" viewBox="0 0 150 56" preserveAspectRatio="none">'
+               f'<path d="{edge(150, 56, 779, 1.5, 1.0)}" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>')
     for n in NAMES:
         out.append(f'<symbol id="g-{n}" viewBox="0 0 120 120">{glaze(n)}</symbol>')
         out.append(f'<symbol id="o-{n}" viewBox="0 0 120 120">{outline(n)}</symbol>')
@@ -130,21 +137,71 @@ def tool(motif):
     return [('o' if i % 2 else 'g', motif, ((i // 2) * 90) % 360) for i in range(N)]
 
 
-def markup(seq, owner):
-    tiles = ''.join(
-        f'<span class="bt" style="--i:{max(0, i - SEEN_FROM)}"><svg viewBox="0 0 120 120">'
-        f'<g transform="rotate({r} 60 60)"><use href="{SPRITE}#{k}-{m}"/></g></svg></span>'
-        for i, (k, m, r) in enumerate(seq))
-    return (f'<div class="tileband" data-owner="{owner}" aria-hidden="true"><div class="row">{tiles}</div></div>')
+def tile(k, m, r, i):
+    return (f'<span class="bt" style="--i:{i}"><svg viewBox="0 0 120 120">'
+            f'<g transform="rotate({r} 60 60)"><use href="{SPRITE}#{k}-{m}"/></g></svg></span>')
+
+
+def navkey(label, href, acc, short=None, extra=''):
+    """A link as a key in the band: drawn in its colour, glazed under the cursor."""
+    lab = (f'<span class="t"><span class="long">{label}</span><span class="short">{short}</span></span>'
+           if short else f'<span class="t">{label}</span>')
+    frames_ = ''.join(f'<use class="f{i}" href="{SPRITE}#e-nav-{i}" width="10" height="10"/>' for i in (1, 2, 3))
+    return (f'<a class="nkey" href="{href}" style="--acc:{acc}"{extra}>'
+            f'<svg class="fl" viewBox="0 0 10 10" preserveAspectRatio="none" aria-hidden="true"><use href="{SPRITE}#e-navfill" width="10" height="10"/></svg>'
+            f'<svg class="ed" viewBox="0 0 10 10" preserveAspectRatio="none" aria-hidden="true">{frames_}</svg>{lab}</a>')
+
+
+BRACE = ('<svg class="brace" width="24" height="22" viewBox="0 0 124 112" fill="none" aria-hidden="true">'
+         '<path d="M30 14 C21 14.6 15.5 18 15.2 26 C14.8 36 15.4 44 15 52 C14.7 56.5 12 58 8 58.4 C12 58.8 14.8 60.4 15.1 65 C15.5 73 14.9 81 15.3 91 C15.6 99 21 102.4 30 103" stroke="#e3e3e3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>'
+         '<path d="M44 27 C58 26.4 74 26.8 88 27.4" stroke="#ff8787" stroke-width="7" stroke-linecap="round"/>'
+         '<path d="M44 58.5 C60 58 78 58.4 94 59" stroke="#ffd43b" stroke-width="7" stroke-linecap="round"/>'
+         '<path d="M44 90 C56 89.4 70 89.8 82 90.4" stroke="#74c0fc" stroke-width="7" stroke-linecap="round"/></svg>')
+
+
+def markup(seq, owner, version=None):
+    """The bar in the band (board 19): one sticky row. A tile bleeding off the
+    left, the wordmark on the ground, a run of tiles that fires in and runs the
+    wave and is cut off by the keys, the links as keys, and a tile bleeding off
+    the right. The band's own rules (fire, wave, hover) still apply to every
+    tile, because they all sit in a .tileband."""
+    lead = tile(*seq[0], 0)
+    mid = ''.join(tile(k, m, r, i + 1) for i, (k, m, r) in enumerate(seq[1:N - 1]))
+    tail = tile(*seq[N - 1], 12)
+    if owner == 'house':
+        word = '<a class="nb-word" href="/" aria-label="ARGH!, home">ARGH!</a>'
+        keys = (navkey('The tools', '#index', 'var(--yellow)', 'Tools')
+                + navkey('What this is', '#rules', 'var(--blue)', 'Rules')
+                + navkey('Join', '#join', 'var(--green)'))
+    else:
+        word = (f'<a class="nb-word" href="/mappr/" aria-label="Mappr">{BRACE}<span>Mappr</span></a>'
+                f'<span class="ver">v{version}</span>')
+        keys = (navkey('How it works', '#how', 'var(--yellow)', extra=' data-wide')
+                + navkey('Keys', '#keys', 'var(--yellow)', extra=' data-wide')
+                + navkey('ARGH!', '/', 'var(--ink)')
+                + navkey('Open Mappr', '/mappr/app', 'var(--yellow)', extra=' data-solid data-plate="quarter-disc"'))
+    return (f'<header class="navband" data-owner="{owner}">'
+            f'<div class="tileband nb-lead" aria-hidden="true"><div class="row">{lead}</div></div>'
+            f'<div class="nb-brand">{word}</div>'
+            f'<div class="tileband nb-mid" aria-hidden="true"><div class="row">{mid}</div></div>'
+            f'<nav class="nb-keys" aria-label="Site">{keys}</nav>'
+            f'<div class="tileband nb-tail" aria-hidden="true"><div class="row">{tail}</div></div>'
+            f'</header>')
 
 
 open('assets/tiles.svg', 'w').write(sprite())
+VERSION = '1.11.0'    # Mappr's, shown in its wordmark
 for page, seq, owner in (('index.html', house(), 'house'), ('mappr/index.html', tool('quarter-disc'), 'mappr')):
     s = open(page).read()
     if '<!--band:start-->' not in s:
         s = s.replace('</header>', '</header>\n\n<!--band:start-->\n<!--band:end-->', 1)
+    # the old bar goes: the band carries the wordmark and the links now
+    s = re.sub(r'<header class="topbar">.*?</header>\n*', '', s, flags=re.S)
+    if owner == 'house':
+        # the house band already carries all six colours, so the stripe goes
+        s = re.sub(r'<div class="spectrum" aria-hidden="true">.*?</div>\n*', '', s, flags=re.S)
     s = re.sub(r'(<!--band:start-->).*?(<!--band:end-->)',
-               lambda mm: mm.group(1) + '\n' + markup(seq, owner) + '\n' + mm.group(2), s, flags=re.S)
+               lambda mm: mm.group(1) + '\n' + markup(seq, owner, VERSION) + '\n' + mm.group(2), s, flags=re.S)
     open(page, 'w').write(s)
-    print(f'{page:18} {owner:6} band of {len(seq)}')
+    print(f'{page:18} {owner:6} band of {len(seq)}, bar folded in')
 print(f'assets/tiles.svg   {os.path.getsize("assets/tiles.svg")} bytes')

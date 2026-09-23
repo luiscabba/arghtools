@@ -29,6 +29,10 @@ SHARED = [
     '.btn.drawn.btn-ghost', '.btn.drawn.btn-ghost .t',
     '.grain', '.grain svg',
     '.tileband', '.tileband .row', '.tileband .bt', '.tileband .bt svg',
+    ':root', '.navband', '.navband .tileband', '.navband .tileband .row', '.navband .tileband .bt',
+    '.navband .nb-lead', '.navband .nb-lead .row', '.navband .nb-tail', '.navband .nb-mid', '.navband .nb-brand',
+    '.navband .nb-word', '.navband .ver', '.navband .nb-keys', '.nkey', '.nkey .ed,.nkey .fl', '.nkey .fl',
+    '.nkey .ed .f2,.nkey .ed .f3', '.nkey .t', '.nkey .short', '.nkey[data-solid] .fl', '.spectrum',
 ]
 HOUSE = ['body.house', '.house .topbar .name', '.house .topbar nav a',
          '.hhero', '.hhero .glaze', '.hhero .wrap', '.hhero .label',

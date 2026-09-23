@@ -739,3 +739,68 @@ footer .cols{justify-content:flex-end}
 .tileband .bt use{animation:bandspin 400ms steps(8,end) calc(1050ms + var(--i) * 45ms)}
 @keyframes bandspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion: reduce){.tileband .bt use{animation:none}}
+
+/* ---------- the bar in the band (book board 19, settled 23 Sept 2026). The
+   page's bar and the band are one sticky row, 56 tall: a tile bleeding off
+   the left, the wordmark on the ground, a run of tiles cut off by the keys,
+   the links as keys, a tile bleeding off the right. The links are drawn,
+   because a person puts their cursor on them (board 05), each an outline in
+   its own colour that glazes solid under the cursor, its label going Field as
+   text on an accent must. The tiles keep the band's fire, wave and hover. The
+   house drops the stripe, since the band carries all six colours; a tool page
+   keeps it at 4px as the parent's signature. ---------- */
+
+:root{--nb:56px}
+html{scroll-padding-top:var(--nb)}
+.spectrum{height:4px}
+.navband{position:sticky;top:0;z-index:20;height:var(--nb);display:flex;align-items:stretch;background:var(--field);
+  border-bottom:1px solid #1c1c1c}
+.navband .tileband{height:var(--nb);display:block;overflow:hidden;background:none}
+.navband .tileband .row{display:flex;height:100%}
+.navband .tileband .bt{width:var(--nb);height:var(--nb);flex:0 0 var(--nb)}
+.navband .nb-lead{flex:0 0 calc(var(--nb) / 2);position:relative}
+.navband .nb-lead .row{position:absolute;right:0;top:0}
+.navband .nb-tail{flex:0 0 calc(var(--nb) / 2)}
+.navband .nb-mid{flex:1 1 0;min-width:0}
+.navband .nb-brand{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:0 28px 0 18px}
+.navband .nb-word{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:800;
+  font-size:22px;letter-spacing:-.8px;color:var(--ink);text-decoration:none}
+.navband .nb-word:hover{color:var(--ink)}
+.navband .ver{font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--line);padding:2px 6px;border-radius:3px}
+.navband .nb-keys{flex:0 0 auto;display:flex}
+
+.nkey{position:relative;display:flex;align-items:center;justify-content:center;min-width:112px;height:var(--nb);
+  padding:0 22px;box-sizing:border-box;text-decoration:none;font-family:var(--mono);font-size:12.5px;font-weight:600;
+  color:var(--acc)}
+.nkey:hover{color:var(--acc)}
+.nkey .ed,.nkey .fl{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;pointer-events:none;color:var(--acc)}
+.nkey .fl{opacity:0}
+.nkey .ed .f2,.nkey .ed .f3{opacity:0}
+.nkey .t{position:relative;white-space:nowrap}
+.nkey .short{display:none}
+.nkey:hover .fl,.nkey:focus-visible .fl,.nkey[data-solid] .fl{opacity:1}
+.nkey:hover .t,.nkey:focus-visible .t,.nkey[data-solid] .t{color:var(--field)}
+.nkey:hover .ed .f1{animation:bf1 .36s steps(1,end) infinite}
+.nkey:hover .ed .f2{animation:bf2 .36s steps(1,end) infinite}
+.nkey:hover .ed .f3{animation:bf3 .36s steps(1,end) infinite}
+.nkey:active{transform:translateY(2px)}
+.nkey:focus-visible{outline:2px solid var(--blue);outline-offset:-5px}
+
+@media (max-width:760px){
+  :root{--nb:48px}
+  .navband .nb-mid{display:none}
+  .navband .nb-brand{flex:1 1 auto;padding:0 10px}
+  .navband .nb-word{font-size:19px}
+  .navband .ver{display:none}
+  .nkey{min-width:0;padding:0 12px;font-size:11.5px}
+  .nkey .long{display:none}
+  .nkey .short{display:inline}
+  .nkey[data-wide]{display:none}
+}
+@media (max-width:380px){
+  .navband .nb-lead,.navband .nb-tail{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  .nkey:hover .ed .f1,.nkey:hover .ed .f2,.nkey:hover .ed .f3{animation:none}
+  .nkey:hover .ed .f1{opacity:1}
+}

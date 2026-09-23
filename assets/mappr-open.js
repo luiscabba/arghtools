@@ -55,7 +55,7 @@
   function lay(a, motif) {
     var W = window.innerWidth, H = window.innerHeight;
     // anchor the grid to the band, so the plate is the band carrying on
-    var row = document.querySelector('.tileband .row');
+    var row = document.querySelector('.nb-mid .row') || document.querySelector('.tileband .row');
     var ox = 0, oy = 0;
     if (row) {
       var b = row.getBoundingClientRect();

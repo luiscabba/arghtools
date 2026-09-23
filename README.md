@@ -202,6 +202,18 @@ under the cursor. A beat after it has fired in, the wave (board 18) runs
 through it once: each motif turns a full circle in eight clicks, left to
 right, then the band settles for good. Nothing moves at rest.
 
+## The bar in the band
+
+Settled 23 September 2026, on board 19. The bar and the band are one sticky
+row, 56px (48 on a phone): a tile bleeding off the left, the wordmark on the
+ground, a run of tiles cut off by the keys, the links as keys, a tile bleeding
+off the right. Each link is drawn in its own colour and glazes solid under the
+cursor; on the house The tools is yellow, What this is blue, Join green, and on
+Mappr every key is yellow except ARGH!, which is ink, with Open Mappr already
+glazed. The house drops the stripe, since the band carries all six colours; a
+tool page keeps it at 4px. `tools/build-band.py` writes the whole row. On a
+phone the run of tiles drops out and the links take short labels.
+
 ## The cards are keys
 
 Settled 23 September 2026, on board 15. The tool cards on the house page sit on
