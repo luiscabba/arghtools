@@ -160,7 +160,7 @@ BRACE = ('<svg class="brace" width="24" height="22" viewBox="0 0 124 112" fill="
          '<path d="M44 90 C56 89.4 70 89.8 82 90.4" stroke="#74c0fc" stroke-width="7" stroke-linecap="round"/></svg>')
 
 
-def markup(seq, owner, version=None):
+def markup(seq, owner, version=None, base=''):
     """The bar in the band (board 19): one sticky row. A tile bleeding off the
     left, the wordmark on the ground, a run of tiles that fires in and runs the
     wave and is cut off by the keys, the links as keys, and a tile bleeding off
@@ -181,9 +181,9 @@ def markup(seq, owner, version=None):
     tail = tile(*seq[N - 1], 12)
     if owner == 'house':
         word = '<a class="nb-word" href="/" aria-label="ARGH!, home">ARGH!</a>'
-        keys = (navkey('The tools', '#index', 'var(--yellow)', 'Tools')
-                + navkey('What this is', '#rules', 'var(--blue)', 'Rules')
-                + navkey('Join', '#join', 'var(--green)'))
+        keys = (navkey('The tools', base + '#index', 'var(--yellow)', 'Tools')
+                + navkey('What this is', base + '#rules', 'var(--blue)', 'Rules')
+                + navkey('Join', base + '#join', 'var(--green)'))
     else:
         word = '<a class="nb-word" href="/mappr/">Mappr</a>'
         keys = (navkey('How it works', '#how', 'var(--yellow)', extra=' data-wide')
@@ -201,7 +201,11 @@ def markup(seq, owner, version=None):
 
 open('assets/tiles.svg', 'w').write(compact_text(sprite()))
 VERSION = '1.11.0'    # Mappr's, shown in its wordmark
-for page, seq, owner in (('index.html', house(), 'house'), ('mappr/index.html', tool('quarter-disc'), 'mappr')):
+# the 404 is the house's too (board 31), so it wears the house band; its keys
+# point back at the house page rather than at sections it does not have
+for page, seq, owner, base in (('index.html', house(), 'house', ''),
+                               ('404.html', house(), 'house', '/'),
+                               ('mappr/index.html', tool('quarter-disc'), 'mappr', '')):
     s = open(page).read()
     if '<!--band:start-->' not in s:
         s = s.replace('</header>', '</header>\n\n<!--band:start-->\n<!--band:end-->', 1)
@@ -211,7 +215,7 @@ for page, seq, owner in (('index.html', house(), 'house'), ('mappr/index.html', 
     if True:
         s = re.sub(r'<div class="spectrum" aria-hidden="true">.*?</div>\n*', '', s, flags=re.S)
     s = re.sub(r'(<!--band:start-->).*?(<!--band:end-->)',
-               lambda mm: mm.group(1) + '\n' + markup(seq, owner, VERSION) + '\n' + mm.group(2), s, flags=re.S)
+               lambda mm: mm.group(1) + '\n' + markup(seq, owner, VERSION, base) + '\n' + mm.group(2), s, flags=re.S)
     open(page, 'w').write(compact_text(s))
     print(f'{page:18} {owner:6} band of {len(seq)}, bar folded in')
 print(f'assets/tiles.svg   {os.path.getsize("assets/tiles.svg")} bytes')

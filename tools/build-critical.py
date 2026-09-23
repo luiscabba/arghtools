@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Inline the critical CSS into both pages, taken from assets/site.css.
+"""Inline the critical CSS into the pages, taken from assets/site.css.
 
     python3 tools/build-critical.py
 
@@ -37,6 +37,8 @@ SHARED = [
 HOUSE = ['body.house', '.house .topbar .name', '.house .topbar nav a',
          '.hhero', '.hhero .glaze', '.hhero .wrap', '.hhero .label',
          '.hhero h1', '.hhero .lead', '.hhero .actions', '.claims', '.claims li', '.claims svg']
+NF = ['body.house', '.house .topbar .name', '.house .topbar nav a',
+      '.nf', '.nf .wrap', '.nf .burst', '.nf h1', '.nf .lead', '.nf .actions', '.nf .label']
 MAPPR = ['.hero', '.hero .label', '.hero h1', '.hero h1 .hl', '.hero .lead',
          '.hero .actions', '.hero .reassure', '.hero-note',
          '.panel', '.panel-bar', '.hero-panel', '.map-paper']
@@ -90,6 +92,7 @@ css = open('assets/site.css').read()
 R = rules(css)
 
 for page, extra, label in (('index.html', HOUSE, 'house'),
+                           ('404.html', NF, '404'),
                            ('mappr/index.html', MAPPR, 'Mappr')):
     block = ('<style>\n'
              '/* Critical: enough to paint dark and roughly right above the fold if\n'

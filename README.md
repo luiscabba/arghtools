@@ -8,6 +8,7 @@ that opens and works.
 
 ```
 index.html                       the house page, ARGH! at the root
+404.html                         the house's not-found page, served by Vercel for any missing route
 mappr/index.html                 the Mappr page
 assets/site.css                  tokens, layout, the whole system
 assets/tiles.svg                 the band, plate and drawn-card sprite (tools/build-band.py)
@@ -127,6 +128,7 @@ Settled 22 September 2026, on board 12 of the brand book.
 | `/` | ARGH! | The house page: the line, the shelf, the three rules, the community |
 | `/mappr/` | Mappr | The tool page |
 | `/mappr/app` | Mappr | The app, rewritten in from its own deployment |
+| anything else | ARGH! | `404.html`, the house's not-found page |
 
 The root is the house and never a tool. A tool owns everything under its own
 folder, and the parent appears there exactly twice: the bar and the footer
@@ -184,7 +186,7 @@ paints in about a fifth of a second; the Mappr page about the same.
 
 ## Critical CSS
 
-Both pages carry an inlined block of critical CSS so a late stylesheet costs
+All three pages carry an inlined block of critical CSS so a late stylesheet costs
 polish rather than the whole design. It is generated, not hand-written:
 
     python3 tools/build-critical.py
@@ -192,7 +194,7 @@ polish rather than the whole design. It is generated, not hand-written:
 That pulls real rules out of `assets/site.css` in source order, so the cascade
 still applies and the two copies cannot drift from the sheet. It writes between
 the `<!--critical:start-->` and `<!--critical:end-->` markers in `index.html`
-and `mappr/index.html`. Change what counts as critical by editing the selector
+`404.html` and `mappr/index.html`. Change what counts as critical by editing the selector
 lists at the top of the script, then re-run it.
 
 Re-run it after any change to the rules it covers, or the pages will paint
@@ -209,7 +211,7 @@ glaze and one motif, solid and open alternating.
 
     python3 tools/build-band.py
 
-writes the band between `<!--band:start-->` and `<!--band:end-->` in both pages,
+writes the band between `<!--band:start-->` and `<!--band:end-->` in all three pages (the 404 wears the house's),
 and `assets/tiles.svg`, the one sprite the band, the plate and the house page's
 drawn cards all use. `tools/glaze-lib.json` holds board 07's six glazes, lifted
 from the book. It fires once on load, left to right, and a tile lifts and turns
@@ -264,6 +266,13 @@ Settled 23 September 2026, on book board 30. ARGH! has two marks, both in
 - **The burst** (`argh-burst.svg`): red, yellow, blue and green strokes out of one
   ink dot. Only where the volume is allowed up: launch day, the house post,
   stickers, the 404. Never recoloured, never in a tab, never below 24px.
+
+On the house page the stamp sits in the footer beside the wordmark, at its cap
+height (34px) with half a mark of clear space (board 31, F1). `404.html` is
+the burst's first use on the site: the burst at 200 (160 on a phone), then
+`Argh!` at hero size, `Nothing lives at this address.` and a way back to the
+shelf (board 31, N2). It wears the house band and footer, and its keys point
+at `/#index`, `/#rules` and `/#join`.
 
 PNGs at the usual sizes are in `assets/brand/png/`. A tool's own page keeps the
 tool's mark as its icon: `mappr/index.html` still points at `assets/icon.svg`,

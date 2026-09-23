@@ -860,3 +860,21 @@ html{scroll-padding-top:var(--nb)}
   .navband .nb-lead,.navband .nb-tail{display:none}
   .navband .nb-brand{flex:0 0 auto;padding:0 10px 0 14px}
 }
+
+/* ---------- the stamp in the footer (board 31, F1): beside the wordmark at
+   its cap height, half a mark of clear space, never touching it (board 30) ---------- */
+footer .lock{display:flex;align-items:center;gap:17px}
+footer .lock .stamp{display:block;width:34px;height:34px;flex-shrink:0}
+
+/* ---------- the 404 (board 31, N2): the burst first, then the word at hero
+   size. The one page on the house allowed to be loud (board 08). The burst is
+   never recoloured and never under 24px (board 30). ---------- */
+.nf{min-height:calc(100svh - var(--nb));display:flex;align-items:center;padding:72px 0 88px}
+.nf .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;width:100%}
+.nf .burst{display:block;width:200px;height:200px}
+.nf h1{font-family:var(--display);font-weight:800;font-size:104px;line-height:.94;letter-spacing:-4px;margin:40px 0 0}
+.nf .lead{margin:18px 0 0;font-size:19px;line-height:1.55;color:var(--ash)}
+.nf .actions{margin-top:30px}
+.nf .label{margin:28px 0 0}
+@media (max-width:1000px){.nf h1{font-size:64px;letter-spacing:-2.2px}.nf .lead{font-size:17px}}
+@media (max-width:640px){.nf .burst{width:160px;height:160px}.nf h1{font-size:56px;letter-spacing:-2px;margin-top:32px}}
