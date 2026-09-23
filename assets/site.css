@@ -141,7 +141,10 @@ p{margin:0}
 }
 .panel-bar::-webkit-scrollbar{display:none}
 .panel-bar .tab{color:var(--muted);white-space:nowrap}
-.panel-bar .tab.on{color:var(--ink);border-bottom:2px solid var(--yellow);padding-bottom:2px}
+/* the view tabs are the app's view keys (Mappr 1.12.0): the one you are in is
+   glazed, Field on yellow; a file tab keeps its underline */
+.panel-bar .tab.on{color:#121212;background:var(--yellow);padding:2px 7px;margin:0 -3px}
+.panel-bar .tab.on.file{color:var(--ink);background:none;border-bottom:2px solid var(--muted);padding:0 0 2px;margin:0}
 .panel-bar .spacer{flex-grow:1}
 .panel-bar .chip{
   font-family:var(--mono);font-size:10px;font-weight:600;
@@ -208,7 +211,6 @@ p{margin:0}
 .hero-panel .stage{
   height:300px;display:flex;align-items:center;justify-content:center;padding:10px;
 }
-.hero-panel .stage svg{width:100%;height:100%;max-height:260px}
 
 /* ---------- 02, the demo panel ---------- */
 
@@ -222,7 +224,7 @@ p{margin:0}
 .panel-bar .chip.hot{
   color:var(--ink);border-color:var(--ink);background:#262626;
 }
-.panel-bar .chip{transition:color .18s ease,border-color .18s ease,background-color .18s ease}
+.panel-bar .chip{transition:color .12s steps(2,end),border-color .12s steps(2,end),background-color .12s steps(2,end)}
 
 /* ---------- 03, philosophy ---------- */
 
@@ -374,18 +376,19 @@ footer .col span{font-size:13px;color:var(--muted)}
 .md-stage{flex:1 1 auto;min-height:0;position:relative}
 .md-stage svg{display:block;width:100%;height:100%}
 .hero-panel{display:flex;flex-direction:column}
-.hero-panel .md-stage{height:320px;padding:0}
+.hero-panel{max-width:920px;margin-inline:auto}
+.hero-panel .md-stage{height:380px;padding:0}
 
 /* ---------- 02, the outline exchange ---------- */
 
 .exchange{
   display:grid;
-  grid-template-columns:minmax(0,340px) auto minmax(0,1fr);
-  gap:18px;align-items:stretch;
+  grid-template-columns:fit-content(300px) auto minmax(0,1fr);
+  gap:18px;align-items:center;
 }
 .ex-text{display:flex;flex-direction:column}
 .outline{
-  margin:0;flex-grow:1;padding:22px 24px;
+  margin:0;flex-grow:1;padding:18px 22px;
   display:flex;flex-direction:column;justify-content:center;
   font-family:var(--mono);font-size:14px;line-height:2;
   color:var(--ink);white-space:pre;overflow-x:auto;
@@ -410,7 +413,7 @@ footer .col span{font-size:13px;color:var(--muted)}
   .ex-arrows{flex-direction:row;justify-content:center;gap:40px}
   .ex-arrow .g{transform:rotate(90deg)}
   .ex-arrow:last-child .g{transform:rotate(-90deg)}
-  .hero-panel .md-stage{height:260px}
+  .hero-panel .md-stage{height:300px}
 }
 @media (max-width:640px){
   .hero-panel .md-stage{height:220px}
@@ -878,3 +881,5 @@ footer .lock .stamp{display:block;width:34px;height:34px;flex-shrink:0}
 .nf .label{margin:28px 0 0}
 @media (max-width:1000px){.nf h1{font-size:64px;letter-spacing:-2.2px}.nf .lead{font-size:17px}}
 @media (max-width:640px){.nf .burst{width:160px;height:160px}.nf h1{font-size:56px;letter-spacing:-2px;margin-top:32px}}
+
+@media (max-width:640px){.story-stage{min-height:0}}

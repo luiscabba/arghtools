@@ -20,7 +20,7 @@ assets/hero-light.js             lights the hero's motifs round the cursor
 assets/hero-field.svg            the house hero's keycap field (tools/build-hero.py)
 assets/fonts/                    Bricolage Grotesque 800, IBM Plex Sans and Mono
 assets/Excalifont-Regular.woff2  the map's hand-drawn face (SIL OFL 1.1)
-assets/icon.svg                  the brace mark, favicon
+assets/icon.svg                  the Mappr page's favicon: Mappr's tile, its mark since 1.12.0
 FONT-LICENSE.md                  travels with the font
 ```
 
@@ -275,8 +275,8 @@ shelf (board 31, N2). It wears the house band and footer, and its keys point
 at `/#index`, `/#rules` and `/#join`.
 
 PNGs at the usual sizes are in `assets/brand/png/`. A tool's own page keeps the
-tool's mark as its icon: `mappr/index.html` still points at `assets/icon.svg`,
-which the Mappr redesign replaces.
+tool's mark as its icon: `mappr/index.html` points at `assets/icon.svg`, which
+since Mappr 1.12.0 is Mappr's tile (brand book board 22 A); the brace is retired.
 
 ## The Open Mappr transition
 
@@ -314,9 +314,8 @@ exist, and the storage note below stops mattering.
 follow the app to `/mappr/app`. Unsolved, and it decides whether the move can
 be made quietly.
 
-**The retract is only half built.** The site drops the plate and hands the app
-`#glaze=<x>,<y>`. Until the Mappr app paints the same plate on its first frame
-and rolls it up, the plate still disappears the moment the app loads.
+**The hero demo still eases.** `assets/mappr-demo.js` glides its camera and
+its nodes, while the app it shows moves in steps since 1.12.0.
 
 **The pinwheel reads as a bow-tie at keycap size.** It is two opposite blades
 in board 07's own drawing. Flowr owns that motif, so it matters before Flowr

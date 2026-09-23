@@ -270,12 +270,13 @@
     for (i = 0; i < order.length; i++){
       n = nodes[order[i]];
       if (n.born > elapsed) continue;
-      minX = Math.min(minX, n.x - n.w / 2); maxX = Math.max(maxX, n.x + n.w / 2);
-      minY = Math.min(minY, n.y - n.h / 2); maxY = Math.max(maxY, n.y + n.h / 2);
+      var fw = widthFor(n.full) / 2;   /* frame where the node is going, at its full width */
+      minX = Math.min(minX, n.x - fw, n.tx - fw); maxX = Math.max(maxX, n.x + fw, n.tx + fw);
+      minY = Math.min(minY, n.y - n.h / 2, n.ty - n.h / 2); maxY = Math.max(maxY, n.y + n.h / 2, n.ty + n.h / 2);
     }
-    var pad = 54;
+    var pad = Math.min(54, vw * 0.05), MAX_S = vw > 700 ? 1.3 : 1;
     var bw = (maxX - minX) + pad * 2, bh = (maxY - minY) + pad * 2;
-    var s = Math.min(vw / bw, vh / bh, 1);
+    var s = Math.min(vw / bw, vh / bh, MAX_S);
     var cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
     if (active){ cx = cx * 0.78 + active.x * 0.22; cy = cy * 0.78 + active.y * 0.22; }
 
@@ -287,6 +288,10 @@
     else {
       var k = 1 - Math.exp(-dt * 3.4);
       camS += (tS - camS) * k; camX += (tX - camX) * k; camY += (tY - camY) * k;
+      /* never let the eased camera show less than the map: zoom out at once, then keep it inside */
+      if (camS > tS){ camX = tX + (camX - tX) * tS / camS; camS = tS; }
+      camX = clamp(camX, vw - (maxX + pad) * camS, -(minX - pad) * camS);
+      camY = clamp(camY, vh - (maxY + pad) * camS, -(minY - pad) * camS);
     }
     cam.setAttribute("transform", "translate(" + camX.toFixed(2) + "," + camY.toFixed(2) +
                                   ") scale(" + camS.toFixed(4) + ")");
@@ -369,8 +374,8 @@
   /* The loop only runs while the panel is on screen and the tab is in front.
      Scrolled away or in a background tab it stops, and picks up where it
      left off when it comes back, so it costs nothing while nobody watches. */
-  var raf = 0, onScreen = true;
-  function running(){ return onScreen && !document.hidden; }
+  var raf = 0, onScreen = true, started = false;
+  function running(){ return started && onScreen && !document.hidden; }
   function wake(){
     if (!raf && running()){ lastTs = 0; raf = requestAnimationFrame(frame); }
   }
@@ -384,6 +389,7 @@
   function start(){
     if (reduced){ still(); window.addEventListener("resize", still); return; }
     reset();
+    started = true;
     wake();
   }
 
