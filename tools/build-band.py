@@ -165,6 +165,16 @@ def markup(seq, owner, version=None):
     wave and is cut off by the keys, the links as keys, and a tile bleeding off
     the right. The band's own rules (fire, wave, hover) still apply to every
     tile, because they all sit in a .tileband."""
+    seq = list(seq)
+    if owner == 'house':
+        # the tile beside the wordmark is always a solid glaze, so the band
+        # reads as starting at the wordmark rather than leaving a hole (board 20)
+        j = next(i for i in range(1, len(seq)) if seq[i][0] == 'g')
+        seq.insert(1, seq.pop(j))
+    else:
+        # a tool band alternates, so start it one along: open at the bleed,
+        # solid beside the wordmark
+        seq = seq[1:] + seq[:1]
     lead = tile(*seq[0], 0)
     mid = ''.join(tile(k, m, r, i + 1) for i, (k, m, r) in enumerate(seq[1:N - 1]))
     tail = tile(*seq[N - 1], 12)
@@ -174,8 +184,7 @@ def markup(seq, owner, version=None):
                 + navkey('What this is', '#rules', 'var(--blue)', 'Rules')
                 + navkey('Join', '#join', 'var(--green)'))
     else:
-        word = (f'<a class="nb-word" href="/mappr/" aria-label="Mappr">{BRACE}<span>Mappr</span></a>'
-                f'<span class="ver">v{version}</span>')
+        word = '<a class="nb-word" href="/mappr/">Mappr</a>'
         keys = (navkey('How it works', '#how', 'var(--yellow)', extra=' data-wide')
                 + navkey('Keys', '#keys', 'var(--yellow)', extra=' data-wide')
                 + navkey('ARGH!', '/', 'var(--ink)')
@@ -197,8 +206,8 @@ for page, seq, owner in (('index.html', house(), 'house'), ('mappr/index.html', 
         s = s.replace('</header>', '</header>\n\n<!--band:start-->\n<!--band:end-->', 1)
     # the old bar goes: the band carries the wordmark and the links now
     s = re.sub(r'<header class="topbar">.*?</header>\n*', '', s, flags=re.S)
-    if owner == 'house':
-        # the house band already carries all six colours, so the stripe goes
+    # no rainbow stripe on any page: the band carries the colour (board 20)
+    if True:
         s = re.sub(r'<div class="spectrum" aria-hidden="true">.*?</div>\n*', '', s, flags=re.S)
     s = re.sub(r'(<!--band:start-->).*?(<!--band:end-->)',
                lambda mm: mm.group(1) + '\n' + markup(seq, owner, VERSION) + '\n' + mm.group(2), s, flags=re.S)

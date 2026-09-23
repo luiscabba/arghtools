@@ -804,3 +804,23 @@ html{scroll-padding-top:var(--nb)}
   .nkey:hover .ed .f1,.nkey:hover .ed .f2,.nkey:hover .ed .f3{animation:none}
   .nkey:hover .ed .f1{opacity:1}
 }
+
+/* ---------- the bar in the band, tightened (book board 20, settled 23 Sept
+   2026). The wordmark sits on the band: 14px either side of it, and the tile
+   beside it is always solid. No rainbow stripe on any page. The run of tiles
+   is a whole number of tiles wide, so no tile is ever cut against a key, and
+   the few pixels left over go to the keys, which stretch to take them
+   (navband.js measures it; without JS the leftover is a small gap before the
+   keys, never a cut tile). On a phone the half tiles at the edges go and the
+   run stays. ---------- */
+.spectrum{display:none}
+.navband .nb-brand{padding:0 14px 0 16px}
+.navband .nb-mid .row{flex-wrap:wrap;align-content:flex-start}
+.navband .nkey{flex:1 0 auto}
+.navband.fitted .nb-mid{flex:0 0 auto}
+.navband.fitted .nb-keys{flex:1 0 auto}
+@media (max-width:760px){
+  .navband .nb-mid{display:block}
+  .navband .nb-lead,.navband .nb-tail{display:none}
+  .navband .nb-brand{flex:0 0 auto;padding:0 10px 0 14px}
+}

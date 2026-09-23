@@ -13,6 +13,7 @@ assets/site.css                  tokens, layout, the whole system
 assets/tiles.svg                 the band, plate and drawn-card sprite (tools/build-band.py)
 assets/mappr-demo.js             the looping map panel in the Mappr hero
 assets/mappr-open.js             the Open Mappr plate
+assets/navband.js                fits the run of tiles in the bar to whole tiles
 assets/keys.js                   lets a phone show why an unbuilt tool will not open
 assets/hero-light.js             lights the hero's motifs round the cursor
 assets/hero-field.svg            the house hero's keycap field (tools/build-hero.py)
@@ -204,15 +205,19 @@ right, then the band settles for good. Nothing moves at rest.
 
 ## The bar in the band
 
-Settled 23 September 2026, on board 19. The bar and the band are one sticky
-row, 56px (48 on a phone): a tile bleeding off the left, the wordmark on the
-ground, a run of tiles cut off by the keys, the links as keys, a tile bleeding
-off the right. Each link is drawn in its own colour and glazes solid under the
-cursor; on the house The tools is yellow, What this is blue, Join green, and on
-Mappr every key is yellow except ARGH!, which is ink, with Open Mappr already
-glazed. The house drops the stripe, since the band carries all six colours; a
-tool page keeps it at 4px. `tools/build-band.py` writes the whole row. On a
-phone the run of tiles drops out and the links take short labels.
+Settled 23 September 2026, on board 19, tightened on board 20. The bar and
+the band are one sticky row, 56px (48 on a phone): a tile bleeding off the
+left, the wordmark on the ground with 14px either side and a solid tile beside
+it, a run of whole tiles, the links as keys, a tile bleeding off the right.
+Each link is drawn in its own colour and glazes solid under the cursor; on the
+house The tools is yellow, What this is blue, Join green, and on Mappr every key
+is yellow except ARGH!, which is ink, with Open Mappr already glazed. Mappr's
+wordmark is just its name. No page has the rainbow stripe any more.
+
+The run of tiles is always a whole number of tiles, so nothing is cut against a
+key; `assets/navband.js` trims it and hands the few pixels left over to the keys.
+On a phone the half tiles at the edges go, the run stays, and the links take
+short labels. `tools/build-band.py` writes the whole row.
 
 ## The cards are keys
 
