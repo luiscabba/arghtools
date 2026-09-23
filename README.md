@@ -251,6 +251,24 @@ the second tap, so the trick is seen first; the unbuilt tools light up and jam
 on the same tap; a rule card toggles. Buttons and the nav keys are not cards and
 act on the first tap. `assets/keys.js`, `.is-sel` in `assets/site.css`.
 
+## The marks
+
+Settled 23 September 2026, on book board 30. ARGH! has two marks, both in
+`assets/brand/`, drawn once and only ever scaled:
+
+- **The stamp** (`argh-stamp*.svg`): A! cut through a tile. The everyday mark: the
+  tab, profile pictures, the app icon, the footer. Ink on the house; it can wear any
+  of the seven glazes (one file each, same outline), and on a tool's page the
+  made-by credit wears that tool's glaze. The house page's favicon and
+  apple-touch-icon are the stamp.
+- **The burst** (`argh-burst.svg`): red, yellow, blue and green strokes out of one
+  ink dot. Only where the volume is allowed up: launch day, the house post,
+  stickers, the 404. Never recoloured, never in a tab, never below 24px.
+
+PNGs at the usual sizes are in `assets/brand/png/`. A tool's own page keeps the
+tool's mark as its icon: `mappr/index.html` still points at `assets/icon.svg`,
+which the Mappr redesign replaces.
+
 ## The Open Mappr transition
 
 Settled 23 September 2026, on board 16. Pressing Open Mappr drops a plate of
