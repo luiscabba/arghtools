@@ -44,6 +44,7 @@ import json, os, random, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 from glaze import jitter, resample, path    # board 05's hand, the same one the hero uses
+from compact import compact_text           # same pixels, fewer bytes
 os.chdir('..')
 
 GLAZE = json.load(open('tools/glaze-lib.json'))       # six lists of {d, attrs}, 120 box
@@ -198,7 +199,7 @@ def markup(seq, owner, version=None):
             f'</header>')
 
 
-open('assets/tiles.svg', 'w').write(sprite())
+open('assets/tiles.svg', 'w').write(compact_text(sprite()))
 VERSION = '1.11.0'    # Mappr's, shown in its wordmark
 for page, seq, owner in (('index.html', house(), 'house'), ('mappr/index.html', tool('quarter-disc'), 'mappr')):
     s = open(page).read()
@@ -211,6 +212,6 @@ for page, seq, owner in (('index.html', house(), 'house'), ('mappr/index.html', 
         s = re.sub(r'<div class="spectrum" aria-hidden="true">.*?</div>\n*', '', s, flags=re.S)
     s = re.sub(r'(<!--band:start-->).*?(<!--band:end-->)',
                lambda mm: mm.group(1) + '\n' + markup(seq, owner, VERSION) + '\n' + mm.group(2), s, flags=re.S)
-    open(page, 'w').write(s)
+    open(page, 'w').write(compact_text(s))
     print(f'{page:18} {owner:6} band of {len(seq)}, bar folded in')
 print(f'assets/tiles.svg   {os.path.getsize("assets/tiles.svg")} bytes')

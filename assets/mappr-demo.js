@@ -250,10 +250,21 @@
     return v < lo ? lo : (v > hi ? hi : v);
   }
 
+  /* the stage's size, read once and again only when it changes, rather than
+     every frame: reading it forces a layout, and the loop runs at 60fps */
+  var box = null, boxKey = "";
+  function stage(){
+    if (!box){ var r = svg.getBoundingClientRect(); box = { w: r.width, h: r.height }; }
+    return box;
+  }
+  if (window.ResizeObserver) new ResizeObserver(function(){ box = null; }).observe(svg);
+  else window.addEventListener("resize", function(){ box = null; });
+
   function fit(active, dt, snap){
-    var r = svg.getBoundingClientRect(), vw = r.width, vh = r.height;
+    var r = stage(), vw = r.w, vh = r.h;
     if (!vw || !vh) return;
-    svg.setAttribute("viewBox", "0 0 " + vw + " " + vh);
+    var key = vw + " " + vh;
+    if (key !== boxKey){ boxKey = key; svg.setAttribute("viewBox", "0 0 " + key); }
 
     var minX = -60, maxX = 60, minY = -40, maxY = 40, i, n;
     for (i = 0; i < order.length; i++){
@@ -352,13 +363,28 @@
 
     fit(active, dt, false);
     draw(elapsed, false);
-    requestAnimationFrame(frame);
+    raf = running() ? requestAnimationFrame(frame) : 0;
   }
+
+  /* The loop only runs while the panel is on screen and the tab is in front.
+     Scrolled away or in a background tab it stops, and picks up where it
+     left off when it comes back, so it costs nothing while nobody watches. */
+  var raf = 0, onScreen = true;
+  function running(){ return onScreen && !document.hidden; }
+  function wake(){
+    if (!raf && running()){ lastTs = 0; raf = requestAnimationFrame(frame); }
+  }
+  if (window.IntersectionObserver){
+    new IntersectionObserver(function(es){
+      onScreen = es[es.length - 1].isIntersecting; wake();
+    }).observe(svg);
+  }
+  document.addEventListener("visibilitychange", wake);
 
   function start(){
     if (reduced){ still(); window.addEventListener("resize", still); return; }
     reset();
-    requestAnimationFrame(frame);
+    wake();
   }
 
   if (document.fonts && document.fonts.load){

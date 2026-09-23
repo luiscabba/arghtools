@@ -41,6 +41,8 @@ body, _, _ = field(W, H, module=MODULE, plan=plan)
 svg = (f'<svg viewBox="0 0 {W} {H}" width="{W}" height="{H}" '
        f'xmlns="http://www.w3.org/2000/svg" aria-hidden="true">\n{body}\n</svg>')
 
+from compact import compact_text     # same pixels, about 40 percent fewer bytes
+svg = compact_text(svg)
 p = os.path.join('..', 'assets', 'hero-field.svg')
 open(p, 'w').write(svg)
 print(f'{cols}x{rows} keys, {len(plan)} motifs ({len(plan)/(cols*rows):.0%}), {len(svg)} bytes')

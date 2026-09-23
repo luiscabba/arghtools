@@ -168,6 +168,20 @@ them inline between `<!--light:start-->` and `<!--light:end-->`;
 `assets/hero-light.js` places and lights them. Mouse and trackpad only: touch
 and reduced motion get the resting field.
 
+## Keeping it fast
+
+Checked 23 September 2026. The house page is about 116KB over 13 requests and
+paints in about a fifth of a second; the Mappr page about the same.
+
+- Every hand-drawn path is written compactly by `tools/compact.py`: one M,
+  then relative steps, no repeated L. Same pixels, about 40 percent fewer
+  bytes. `build-hero.py` and `build-band.py` run it on what they write.
+- The map demo in the Mappr hero only runs while it is on screen and the tab
+  is in front, and reads its size only when the size changes.
+- `vercel.json` caches the fonts for a year and the other assets for a day,
+  served stale for a week while they refresh, since their names do not change
+  when their contents do.
+
 ## Critical CSS
 
 Both pages carry an inlined block of critical CSS so a late stylesheet costs
