@@ -17,6 +17,7 @@ assets/mappr-open.js             the Open Mappr plate
 assets/navband.js                fits the run of tiles in the bar to whole tiles
 assets/keys.js                   lets a phone show why an unbuilt tool will not open
 assets/hero-light.js             lights the hero's motifs round the cursor
+assets/seams.js                  moves the house page's seams while you scroll
 assets/hero-field.svg            the house hero's keycap field (tools/build-hero.py)
 assets/fonts/                    Bricolage Grotesque 800, IBM Plex Sans and Mono
 assets/Excalifont-Regular.woff2  the map's hand-drawn face (SIL OFL 1.1)
@@ -243,7 +244,8 @@ pressed. Mappr's grows a little branch out of Open Mappr; Flowr's pinwheel goes
 round; Docr's half disc comes up. A tool that is not built jams instead of going
 down and says so, with a link to ask for it (`assets/keys.js` is only there
 because a phone does not focus a button it taps). Rule cards are not
-clickable, so they stay straight and only stamp their number as a tile. The
+clickable, so they stay straight; their number is drawn by hand (see The seams
+and the rule cards). The
 link cards are drawn in their own colour and each icon has one small trick.
 
 A phone cannot hover, so on a touch screen a card is selected instead: tapping
@@ -252,6 +254,42 @@ one card at a time, until you tap somewhere else. A card that is a link goes on
 the second tap, so the trick is seen first; the unbuilt tools light up and jam
 on the same tap; a rule card toggles. Buttons and the nav keys are not cards and
 act on the first tap. `assets/keys.js`, `.is-sel` in `assets/site.css`.
+
+## The seams and the rule cards
+
+Settled 24 September 2026, from the scroll mockup. Below the hero the house
+page was flat and tight, so:
+
+- **Roomy.** Sections sit 110px apart against a seam and 132 above the shelf
+  (desktop only; the phone spacing is unchanged). Headings are 54px.
+- **Dot paper.** The page ground below the hero is a faint dot on the 68
+  module, where the Mappr page has its grid. The hero keeps the keycap field.
+- **Seams.** One row of tiles between each pair of sections after the shelf
+  and above the footer: the band repeated down the page. None under the hero,
+  because the band is right above it. Mostly open glazes at 22 percent, about
+  one in eight solid, one in ten empty. On a tool's page they would be that
+  tool's glaze and motif only.
+
+      python3 tools/build-seams.py
+
+  writes them between `<!--seam:start-->` and `<!--seam:end-->` in
+  `index.html`, dealt with a fixed seed. The tiles are in the markup, so the
+  seams are there without any script. `assets/seams.js` moves them: a seam
+  fills in left to right the first time it is seen, slides sideways as you
+  scroll (alternate seams the other way), about a quarter of its tiles spin at
+  their own speed and direction, and one solid glaze runs along it. A tile
+  lifts and turns a quarter under the cursor, as in the band. Reduced motion
+  gets the still seams.
+- **Numeral rule cards.** Each rule card carries its number drawn by hand,
+  big, bleeding off the top right corner, in the card's glaze (orange, red,
+  violet: the three motifs no tool owns), with a run of three small tiles top
+  left. The hand is an SVG turbulence displacement on the display face, a
+  second thinner pass at half opacity, three frames. Under the cursor, or
+  when a phone selects the card, the frames cycle and the number fills.
+
+**The motion rule.** Movement tied to the scroll eases, because stepped
+movement tied to the scroll reads as lag. Everything you hover or press stays
+stepped, like the rest of the site. Nothing moves at rest.
 
 ## The marks
 
