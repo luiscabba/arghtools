@@ -291,6 +291,15 @@ page was flat and tight, so:
 movement tied to the scroll reads as lag. Everything you hover or press stays
 stepped, like the rest of the site. Nothing moves at rest.
 
+## The launch line
+
+Settled 24 September 2026. For the launch, the house page's title and its
+link card say **Less noise.**, a campaign line (brand book board 02: temporary,
+retires with the campaign, never promoted). The house line stays **Less argh.**
+everywhere else. The card is `assets/og-house.png`, 1200 x 630, drawn in the
+social kit (board 33). When the launch ends, the title and the card go back
+to the house line.
+
 ## The marks
 
 Settled 23 September 2026, on book board 30. ARGH! has two marks, both in
