@@ -266,6 +266,9 @@ Settled 23 September 2026, on book board 30. ARGH! has two marks, both in
 - **The burst** (`argh-burst.svg`): red, yellow, blue and green strokes out of one
   ink dot. Only where the volume is allowed up: launch day, the house post,
   stickers, the 404. Never recoloured, never in a tab, never below 24px.
+  It is also the social profile picture on every platform, without its tile
+  (`argh-burst-open.svg`, the same drawing with the dark tile removed), sitting
+  straight on the circle (brand book board 33, 24 September 2026).
 
 On the house page the stamp sits in the footer beside the wordmark, at its cap
 height (34px) with half a mark of clear space (board 31, F1). `404.html` is
