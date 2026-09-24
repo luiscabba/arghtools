@@ -37,7 +37,7 @@ and this should still be unmistakably Mappr.
 
 - The parent appears twice. The `ARGH!` link in the bar and the footer
   endorsement block. Nothing between them belongs to the parent.
-- `Less dragging.` is Mappr's line and it replaces `Less argh.` everywhere on
+- `Less dragging.` is Mappr's line and it replaces `Less noise.` everywhere on
   this page. The house line appears once, in the footer, where the parent is
   speaking as itself.
 - Yellow is Mappr's. The other five accents only appear in the index.
@@ -291,14 +291,16 @@ page was flat and tight, so:
 movement tied to the scroll reads as lag. Everything you hover or press stays
 stepped, like the rest of the site. Nothing moves at rest.
 
-## The launch line
+## The house line
 
-Settled 24 September 2026. For the launch, the house page's title and its
-link card say **Less noise.**, a campaign line (brand book board 02: temporary,
-retires with the campaign, never promoted). The house line stays **Less argh.**
-everywhere else. The card is `assets/og-house.png`, 1200 x 630, drawn in the
-social kit (board 33). When the launch ends, the title and the card go back
-to the house line.
+Settled 24 September 2026: the house line is **Less noise.** It replaced
+**Less argh.** everywhere: the hero, every footer, the title, the link card,
+the social kit and the brand book. It began as the launch's campaign line the
+same day and was promoted to the house line within hours. The link card is
+`assets/og-house.png`, 1200 x 630, drawn in the social kit (board 33).
+
+Tool lines keep their own form, `Less <one word>.`: Mappr is still
+**Less dragging.** Only the parent says argh, and now only as its name.
 
 ## The marks
 
@@ -371,7 +373,7 @@ its nodes, while the app it shows moves in steps since 1.12.0.
 in board 07's own drawing. Flowr owns that motif, so it matters before Flowr
 ships.
 
-**The inversion has no second half.** The hero runs `Less argh.` plain rather
+**The inversion has no second half.** The hero runs `Less noise.` plain rather
 than inventing a pairing. The house page is the surface that most deserves
 one.
 
