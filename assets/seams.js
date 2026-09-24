@@ -4,7 +4,7 @@
  * without this file. This only moves them, and only while you scroll:
  *  - a seam fills in left to right the first time it comes on screen
  *  - it slides sideways as you scroll, alternate seams the other way
- *  - about a quarter of its tiles spin, each at its own speed
+ *  - about a quarter of its open tiles spin, each at its own speed
  *  - one solid glaze runs along it, one tile per 46px of scroll
  * Scroll movement eases instead of stepping: stepped movement tied to the
  * scroll reads as lag. Hover and press stay stepped, like the rest of the
@@ -39,7 +39,7 @@
   // the runner glazes a tile by pointing its <use> at the solid version
   function glaze(t, on) {
     var u = t.querySelector('use');
-    if (!u) return;
+    if (!u || t.classList.contains('spin')) return;   // never glaze a tile that is off the grid
     if (!u._h) u._h = u.getAttribute('href');
     u.setAttribute('href', on ? u._h.replace('#o-', '#g-') : u._h);
   }

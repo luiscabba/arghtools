@@ -11,8 +11,8 @@ first run puts the markers in front of #rules, #join and the footer.
 
 Tiles are dealt with a fixed seed per seam, so the page never changes unless
 this script does. Most tiles are the open glaze at low opacity, about one in
-eight is solid, and one in ten is left empty; about a quarter spin as you
-scroll, each at its own speed and in its own direction. The tiles sit in the
+eight is solid, and one in ten is left empty; about a quarter of the open ones
+spin as you scroll, each at its own speed and in its own direction. The tiles sit in the
 markup, so the seams are there without the script; assets/seams.js only moves
 them.
 """
@@ -39,6 +39,7 @@ def seam(k):
             out.append(f'<span class="st e" style="--i:{i}"></span>')
             continue
         kind = 'g' if x < .12 else 'o'
+        spin = spin and kind == 'o'   # a solid square turned off the grid looks broken
         cls = f'st {kind}' + (' spin' if spin else '')
         data = f' data-sp="{sp:.2f}"' if spin else ''
         out.append(f'<span class="{cls}" style="--i:{i}"{data}><svg viewBox="0 0 120 120">'

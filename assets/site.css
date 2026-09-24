@@ -926,7 +926,13 @@ footer .lock .stamp{display:block;width:34px;height:34px;flex-shrink:0}
 .seams-on .seam.in .st.o{opacity:.22}
 .seams-on .seam.in .st.lit{opacity:1;transition-delay:0ms}
 .seams-on .seam.in .st.lit2{opacity:.45;transition-delay:0ms}
+/* the runner never dims a solid tile it passes */
+.seams-on .seam.in .st.g.lit2{opacity:1}
 @media (hover:hover){.seams-on .seam.in .st:hover{opacity:1;transition-delay:0ms}}
+/* the last seam is the footer's top edge: no gap, no second rule, and the
+   footer is solid so the dot paper stops at it */
+.seam + footer{margin-top:0;border-top:0}
+.house footer{background:#1a1a1a}
 @media (max-width:640px){
   .seam{height:48px}
   .seam .st{width:48px;height:48px;flex-basis:48px}
