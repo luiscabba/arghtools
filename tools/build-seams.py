@@ -42,7 +42,7 @@ def seam(k):
         spin = spin and kind == 'o'   # a solid square turned off the grid looks broken
         cls = f'st {kind}' + (' spin' if spin else '')
         data = f' data-sp="{sp:.2f}"' if spin else ''
-        out.append(f'<span class="{cls}" style="--i:{i}"{data}><svg viewBox="0 0 120 120">'
+        out.append(f'<span class="{cls}" style="--i:{i}"{data}><svg viewBox="0 0 120 120" width="68" height="68">'
                    f'<g transform="rotate({rot} 60 60)"><use href="{SPRITE}#{kind}-{name}"/></g></svg></span>')
     return '<div class="seam" aria-hidden="true"><div class="row">' + ''.join(out) + '</div></div>'
 

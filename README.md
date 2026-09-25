@@ -23,6 +23,7 @@ assets/fonts/                    Bricolage Grotesque 800, IBM Plex Sans and Mono
 assets/Excalifont-Regular.woff2  the map's hand-drawn face (SIL OFL 1.1)
 assets/icon.svg                  the Mappr page's favicon: Mappr's tile, its mark since 1.12.0
 FONT-LICENSE.md                  travels with the font
+tools/stamp-assets.py            cache-busts the CSS and JS each page loads (run it last)
 ```
 
 To work on it, open `index.html` in a browser. There is nothing to install and
@@ -184,6 +185,14 @@ paints in about a fifth of a second; the Mappr page about the same.
 - `vercel.json` caches the fonts for a year and the other assets for a day,
   served stale for a week while they refresh, since their names do not change
   when their contents do.
+- Because of that, every stylesheet and script a page loads carries
+  `?v=<hash of the file>`, so a changed file is a new URL and a returning
+  visitor never gets a new page with yesterday's stylesheet (on 25 Sept 2026
+  that turned the first seam into a 59,000px column and the page seemed to
+  end at the shelf until a refresh). **Run `python3 tools/stamp-assets.py`
+  last, after any other build script and after editing any CSS or JS.**
+  The seam and numeral SVGs also carry their own width and height, so even
+  unstyled they stay small.
 
 ## Critical CSS
 
